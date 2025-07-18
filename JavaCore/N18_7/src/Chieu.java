@@ -20,30 +20,34 @@ public class Chieu {
         importArrayList(numberOfEmployees,sc,name,age,sex,wage,gradePoint);
         printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
 
-        //sap xep theo tuoi
-        sortEmplyeesByWage(name,age,sex,wage,gradePoint);
-        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+//        //sap xep theo tuoi
+//        sortEmplyeesByWage(name,age,sex,wage,gradePoint);
+//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+//
+//        //in ra 2 nhan vien diem cao nhat
+//        findEmployeesByHighestGradePoint12(name,age,sex,wage,gradePoint);
+//
+//        //tim theo ten
+//        findEmployeesByName(sc,name,age,sex,wage,gradePoint);
+//
+//        //Thêm 1 nhân viên mới
+//        addEmployees(sc,name,age,sex,wage,gradePoint);
+//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+//
+//        //tìm kiếm theo vị trí
+//        findEmployeesById(sc,name,age,sex,wage,gradePoint);
+//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+//
+//        //xóa nhân viên theo vị trí
+//        deleteEmployeesById(sc,name,age,sex,wage,gradePoint);
+//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+//
+//        //đổi vị trí của nhân viên thứ i với nhân viên thứ j
+//        swapEmplyeesById(sc,name,age,sex,wage,gradePoint);
+//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
 
-        //in ra 2 nhan vien diem cao nhat
-        findEmployeesByHighestGradePoint12(name,age,sex,wage,gradePoint);
-
-        //tim theo ten
-        findEmployeesByName(sc,name,age,sex,wage,gradePoint);
-
-        //Thêm 1 nhân viên mới
-        addEmployees(sc,name,age,sex,wage,gradePoint);
-        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
-
-        //tìm kiếm theo vị trí
-        findEmployeesById(sc,name,age,sex,wage,gradePoint);
-        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
-
-        //xóa nhân viên theo vị trí
-        deleteEmployeesById(sc,name,age,sex,wage,gradePoint);
-        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
-
-        //đổi vị trí của nhân viên thứ i với nhân viên thứ j
-        swapEmplyeesById(sc,name,age,sex,wage,gradePoint);
+        //Cập nhật nhân viên tìm kiếm theo từ khóa là tên
+        updateEmplyeesByName(sc,name,age,sex,wage,gradePoint);
         printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
     }
     public static void importArrayList(int n, Scanner sc , ArrayList<String> name , ArrayList<Integer>age
@@ -222,6 +226,35 @@ public class Chieu {
         Collections.swap(sex, i, j);
         Collections.swap(wage, i, j);
         Collections.swap(gradePoint, i, j);
+    }
+    public  static void updateEmplyeesByName(Scanner sc,ArrayList<String>name , ArrayList<Integer>age
+            , ArrayList<String>sex , ArrayList<Integer>wage , ArrayList<Integer>gradePoint){
+        System.out.println("Nhập tên chủa nhân viên cần cap nhật");
+        String nameEmplyees = sc.nextLine();
+        for(int i = 0 ; i < name.size() ; i++){
+            if(name.get(i).equals(nameEmplyees)){
+                System.out.println("Thay đổi tên của " +name.get(i)+" thành :");
+                String nameUpdate = sc.nextLine();
+                name.set(i,nameUpdate);
+                System.out.println("Thay đổi tuổi :");
+                int ageUpdate = sc.nextInt();
+                sc.nextLine();
+                age.set(i,ageUpdate);
+                System.out.println("Thay đổi giới tính:");
+                String sexUpdate = sc.nextLine();
+                sex.set(i,sexUpdate);
+                System.out.println("Thay đổi mức lương:");
+                int wageUpdate = sc.nextInt();
+                sc.nextLine();
+                wage.set(i,wageUpdate);
+                System.out.println("Thay đổi điểm trung bình đại học:");
+                int gradePointUpdate = sc.nextInt();
+                sc.nextLine();
+                name.set(i,nameUpdate);
+
+            }
+        }
+
     }
 
 }
