@@ -9,6 +9,7 @@ public class Sang_Mang_2_Chieu {
         int y = sc.nextInt();
         System.out.println("Mang co " + x + " hang va " + y +" cot !");
         int[][] arr = new int[x][y];
+        //arr[chieu cao][chieu rong]
         //nhap mang
         importArray(arr,sc);
         //in mang
