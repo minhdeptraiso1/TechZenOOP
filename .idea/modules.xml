@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/KhoaHocJavaTechzen.iml" filepath="$PROJECT_DIR$/.idea/KhoaHocJavaTechzen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/N14_7/N14_7.iml" filepath="$PROJECT_DIR$/JavaCore/N14_7/N14_7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/N16_7/N16_7.iml" filepath="$PROJECT_DIR$/JavaCore/N16_7/N16_7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/N18_7/N18_7.iml" filepath="$PROJECT_DIR$/JavaCore/N18_7/N18_7.iml" />
+    </modules>
+  </component>
+</project>

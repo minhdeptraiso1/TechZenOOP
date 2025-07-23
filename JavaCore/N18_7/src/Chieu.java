@@ -2,55 +2,84 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
+
+
 //đề bai : thông tin của nhân viên bao gồm họ teen ,tuổi ,giới tính,mức lương cơ bản
 //điểm trung bình tốt nghiệp đại học (theo thang điểm 10) mỗi thông tin sẽ dc lưu trong 1 arrayslist riêng
 public class Chieu {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập số lượng nhân viên");
-        int numberOfEmployees = sc.nextInt();//số lượng nhân viên
-        sc.nextLine();
-        ArrayList<String> name = new ArrayList<>();//tên
-        ArrayList<Integer> age = new ArrayList<>();//tuổi
-        ArrayList<String> sex = new ArrayList<>();//giới tính
-        ArrayList<Integer> wage = new ArrayList<>();//lương
-        ArrayList<Integer> gradePoint = new ArrayList<>();//điểm trung bình đại học
+        ArrayList<String> name = new ArrayList<>();
+        ArrayList<Integer> age = new ArrayList<>();
+        ArrayList<String> sex = new ArrayList<>();
+        ArrayList<Integer> wage = new ArrayList<>();
+        ArrayList<Integer> gradePoint = new ArrayList<>();
 
-        //Thêm thông tin nhân viên
-        importArrayList(numberOfEmployees,sc,name,age,sex,wage,gradePoint);
-        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+        int choice;
+        int numberOfEmployees = 0;
 
-//        //sap xep theo tuoi
-//        sortEmplyeesByWage(name,age,sex,wage,gradePoint);
-//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
-//
-//        //in ra 2 nhan vien diem cao nhat
-//        findEmployeesByHighestGradePoint12(name,age,sex,wage,gradePoint);
-//
-//        //tim theo ten
-//        findEmployeesByName(sc,name,age,sex,wage,gradePoint);
-//
-//        //Thêm 1 nhân viên mới
-//        addEmployees(sc,name,age,sex,wage,gradePoint);
-//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
-//
-//        //tìm kiếm theo vị trí
-//        findEmployeesById(sc,name,age,sex,wage,gradePoint);
-//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
-//
-//        //xóa nhân viên theo vị trí
-//        deleteEmployeesById(sc,name,age,sex,wage,gradePoint);
-//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
-//
-//        //đổi vị trí của nhân viên thứ i với nhân viên thứ j
-//        swapEmplyeesById(sc,name,age,sex,wage,gradePoint);
-//        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+        do {
+            System.out.println("\n===== MENU QUẢN LÝ NHÂN VIÊN =====");
+            System.out.println("1. Nhập danh sách nhân viên");
+            System.out.println("2. In danh sách nhân viên");
+            System.out.println("3. Sắp xếp theo lương");
+            System.out.println("4. In 2 nhân viên có điểm cao nhất");
+            System.out.println("5. Tìm kiếm theo tên");
+            System.out.println("6. Thêm nhân viên mới");
+            System.out.println("7. Tìm kiếm theo vị trí (ID)");
+            System.out.println("8. Xóa nhân viên theo vị trí");
+            System.out.println("9. Đổi vị trí nhân viên (i <-> j)");
+            System.out.println("10. Cập nhật nhân viên theo tên");
+            System.out.println("0. Thoát");
+            System.out.print("Chọn chức năng: ");
+            choice = sc.nextInt();
+            sc.nextLine(); // đọc bỏ dòng thừa
 
-        //Cập nhật nhân viên tìm kiếm theo từ khóa là tên
-        updateEmplyeesByName(sc,name,age,sex,wage,gradePoint);
-        printArrayList(name.size(),sc,name,age,sex,wage,gradePoint);
+            switch (choice) {
+                case 1:
+                    System.out.print("Nhập số nhân viên: ");
+                    numberOfEmployees = sc.nextInt();
+                    sc.nextLine();
+                    importArrayList(numberOfEmployees, sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 2:
+                    printArrayList(name.size(), sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 3:
+                    sortEmplyeesByWage(name, age, sex, wage, gradePoint);
+                    printArrayList(name.size(), sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 4:
+                    findEmployeesByHighestGradePoint12(name, age, sex, wage, gradePoint);
+                    break;
+                case 5:
+                    findEmployeesByName(sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 6:
+                    addEmployees(sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 7:
+                    findEmployeesById(sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 8:
+                    deleteEmployeesById(sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 9:
+                    swapEmplyeesById(sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 10:
+                    updateEmplyeesByName(sc, name, age, sex, wage, gradePoint);
+                    break;
+                case 0:
+                    System.out.println("Đã thoát chương trình.");
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ. Mời chọn lại.");
+            }
+
+        } while (choice != 0);
     }
-    public static void importArrayList(int n, Scanner sc , ArrayList<String> name , ArrayList<Integer>age
+        public static void importArrayList(int n, Scanner sc , ArrayList<String> name , ArrayList<Integer>age
                                         , ArrayList<String>sex , ArrayList<Integer>wage , ArrayList<Integer>gradePoint){
         for (int i = 0; i < n; i++) {
             System.out.println("Nhập thông tin cho nhân viên thứ "+(i+1)+":");
@@ -191,18 +220,35 @@ public class Chieu {
             }
         }
     }
-    public static void sortEmplyeesByWage( ArrayList<String>name , ArrayList<Integer>age
+    //c1
+//    public static void sortEmplyeesByWage( ArrayList<String>name , ArrayList<Integer>age
+//            , ArrayList<String>sex , ArrayList<Integer>wage , ArrayList<Integer>gradePoint) {
+//        ArrayList<Integer> wageCopy = new ArrayList<>(wage);
+//        Collections.sort(wageCopy);
+//
+//        for (int i = 0; i < wage.size(); i++) {
+//            Integer targetWage = wageCopy.get(i);  // Lương cần tìm ở vị trí i
+//
+//            // Tìm vị trí của targetWage trong mảng gốc
+//            for (int j = i ; j < wage.size(); j++) {  // Bắt đầu từ i để tránh swap lại
+//                if (wage.get(j).equals(targetWage)) {
+//                    // Swap tất cả mảng
+//                    Collections.swap(name, i, j);
+//                    Collections.swap(age, i, j);
+//                    Collections.swap(sex, i, j);
+//                    Collections.swap(wage, i, j);
+//                    Collections.swap(gradePoint, i, j);
+//                    break;  // Quan trọng: phải break để tránh swap nhiều lần
+//                }
+//            }
+//        }
+//    }
+    //c2
+        public static void sortEmplyeesByWage( ArrayList<String>name , ArrayList<Integer>age
             , ArrayList<String>sex , ArrayList<Integer>wage , ArrayList<Integer>gradePoint) {
-        ArrayList<Integer> wageCopy = new ArrayList<>(wage);
-        Collections.sort(wageCopy);
-
-        for (int i = 0; i < wage.size(); i++) {
-            Integer targetWage = wageCopy.get(i);  // Lương cần tìm ở vị trí i
-
-            // Tìm vị trí của targetWage trong mảng gốc
-            for (int j = i; j < wage.size(); j++) {  // Bắt đầu từ i để tránh swap lại
-                if (wage.get(j).equals(targetWage)) {
-                    // Swap tất cả mảng
+        for (int i = 0 ; i < wage.size() ; i++){
+            for (int j = i + 1 ; j < wage.size()-i ; j++){
+                if(wage.get(i) > wage.get(j)){
                     Collections.swap(name, i, j);
                     Collections.swap(age, i, j);
                     Collections.swap(sex, i, j);
@@ -250,7 +296,7 @@ public class Chieu {
                 System.out.println("Thay đổi điểm trung bình đại học:");
                 int gradePointUpdate = sc.nextInt();
                 sc.nextLine();
-                name.set(i,nameUpdate);
+
 
             }
         }

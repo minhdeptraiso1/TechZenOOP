@@ -18,56 +18,83 @@ public class B1_Nhu {
 
      */
             Scanner sc = new Scanner(System.in);
-            int k;
-            int[][] arr = {
-                    {1,  2, -3,  4},
-                    {4,  8,  9,  2},
-                    {6,  0,  2, -5},
-                    {7,  8, 11,  3},
-                    {4, -5,  5,  4}
-            };
+//            int k;
+//            int[][] arr = {
+//                    {1,  2, -3,  4},
+//                    {4,  8,  9,  2},
+//                    {6,  0,  2, -5},
+//                    {7,  8, 11,  3},
+//                    {4, -5,  5,  4}
+//            };
+//
+//            System.out.println("Mảng ban đầu: ");
+//            inMang2Chieu(arr);
+//
+//            while (true) {
+//                System.out.print("Nhập k: ");
+//                k = sc.nextInt();
+//                if (k <= 0 || k > arr.length || k > arr[0].length) {
+//                    System.out.print("k nhập vào không hợp lệ. Nhập lại! ");
+//                } else {
+//                    break;
+//                }
+//            }
+//
+//            int row = -1;
+//            int col = -1;
+//
+//            int max = Integer.MIN_VALUE;
+//
+//            for (int i = 0; i <= arr.length - k; i++) {
+//                for (int j = 0; j <= arr[i].length - k; j++) {
+//                    int sum = 0;
+//                    for (int a = 0; a < k; a++) {
+//                        for (int b = 0; b < k; b++) {
+//                            sum += arr[i + a][j + b];
+//                        }
+//                    }
+//                    if (sum > max) {
+//                        max = sum;
+//                        row = i;
+//                        col = j;
+//                    }
+//                }
+//            }
+//
+//            if (row == -1 || col == -1) {
+//                System.out.println("Không tìm thấy hình vuông con hợp lệ.");
+//                return;
+//            }
+//
+//            System.out.println("Tổng lớn nhất: " + max);
+//            System.out.println("Ví trí bắt đầu của mảng mới kxk là: hàng: " + row + ", cột: " + col);
+        System.out.println("nhap ho va ten ");
+        String ten = sc.nextLine();
+        nhapTen(ten);
 
-            System.out.println("Mảng ban đầu: ");
-            inMang2Chieu(arr);
 
-            while (true) {
-                System.out.print("Nhập k: ");
-                k = sc.nextInt();
-                if (k <= 0 || k > arr.length || k > arr[0].length) {
-                    System.out.print("k nhập vào không hợp lệ. Nhập lại! ");
-                } else {
-                    break;
-                }
-            }
-
-            int row = -1;
-            int col = -1;
-
-            int max = Integer.MIN_VALUE;
-
-            for (int i = 0; i <= arr.length - k; i++) {
-                for (int j = 0; j <= arr[i].length - k; j++) {
-                    int sum = 0;
-                    for (int a = 0; a < k; a++) {
-                        for (int b = 0; b < k; b++) {
-                            sum += arr[i + a][j + b];
-                        }
-                    }
-                    if (sum > max) {
-                        max = sum;
-                        row = i;
-                        col = j;
-                    }
-                }
-            }
-
-            if (row == -1 || col == -1) {
-                System.out.println("Không tìm thấy hình vuông con hợp lệ.");
-                return;
-            }
-
-            System.out.println("Tổng lớn nhất: " + max);
-            System.out.println("Ví trí bắt đầu của mảng mới kxk là: hàng: " + row + ", cột: " + col);
+        }
+        private static void nhapTen(String a){
+//        String[] ten2 = a.trim().split("\\s+");
+//        System.out.println(ten2[ten2.length-1]);
+//            a=a.replaceAll("\\s+" , " ").toLowerCase();
+//            int av = 0 ;
+//            int bv = a.length()-1;
+//            while ( av < bv ){
+//                if(a.charAt(av) == a.charAt(bv)){
+//                   System.out.println("DUng");
+//                   break;
+//                }
+//                else {
+//                    System.out.println("sau");
+//                }
+//            }
+            String b = a.toUpperCase();
+            System.out.println(b);
+            int c = a.replaceAll("\\s+","").length();
+            System.out.println(c);
+            String[] d = a.trim().split("\\s+");
+            System.out.println(d[d.length-1]);
 
         }
 
