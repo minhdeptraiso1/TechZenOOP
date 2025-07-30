@@ -1,7 +1,4 @@
-package Coordinates;
-
-import Fraction.Fraction;
-
+package OOP1.OOP_Demo.Coordinates;
 import java.util.ArrayList;
 
 public class CoordinatesChange {

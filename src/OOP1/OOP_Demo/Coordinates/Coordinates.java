@@ -1,4 +1,4 @@
-package Coordinates;
+package OOP1.OOP_Demo.Coordinates;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -7,13 +7,14 @@ public class Coordinates {
     double x;
     double y;
 
-    public static double distanceTo(Coordinates f1, Coordinates f2){
+    public static double distanceTo(Coordinates f1, Coordinates f2) {
         double dx = f2.x - f1.x;
         double dy = f2.y - f1.y;
         return Math.sqrt(dx * dx + dy * dy);
         // công thức AB= căn bậc 2 (xB−xA)^2+(yB−yA)^2
     }
-    public void input(){
+
+    public void input() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
@@ -29,7 +30,7 @@ public class Coordinates {
         while (true) {
             try {
                 System.out.print("Nhập tọa độ y: ");
-                x = sc.nextDouble();
+                y = sc.nextDouble();
                 sc.nextLine(); // Xóa bộ đệm
                 break;
             } catch (InputMismatchException e) {
@@ -39,7 +40,8 @@ public class Coordinates {
         }
 
     }
-    public void output(){
-        System.out.println("Toa do x : " + x+" toa do y: " + y);
+
+    public void output() {
+        System.out.println("Toa do x : " + x + " toa do y: " + y);
     }
 }

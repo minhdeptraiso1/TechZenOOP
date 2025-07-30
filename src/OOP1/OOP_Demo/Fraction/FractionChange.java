@@ -1,4 +1,4 @@
-package Fraction;
+package OOP1.OOP_Demo.Fraction;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -63,7 +63,6 @@ public class FractionChange {
         } catch (Exception e) {
             System.out.println("Lỗi khi thực hiện phép chia!");
         }
-
 
 
     }

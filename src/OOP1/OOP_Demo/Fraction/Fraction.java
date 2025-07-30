@@ -1,45 +1,48 @@
-package Fraction;
+package OOP1.OOP_Demo.Fraction;
 
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Fraction {
-     int numerator;     //tu so
-     int denominator;   // mau so
-    public void checkFraction(Fraction a){
-        if(a.numerator > 0 && a.denominator > 0){
+    int numerator;     //tu so
+    int denominator;   // mau so
+
+    public void checkFraction(Fraction a) {
+        if (a.numerator > 0 && a.denominator > 0) {
             System.out.println("la phan so duong");
-        }
-        else if(a.numerator == 0 ){
+        } else if (a.numerator == 0) {
             System.out.println("la phan so = 0");
-        }
-        else{
+        } else {
             System.out.println("la phan so am");
         }
     }
-    public Fraction sum(Fraction f1 , Fraction f2){
+
+    public Fraction sum(Fraction f1, Fraction f2) {
         Fraction sumFraction = new Fraction();
         sumFraction.numerator = f1.numerator * f2.denominator + f2.numerator * f1.denominator;
         sumFraction.denominator = f1.denominator * f2.denominator;
         sumFraction.simplify();
         return sumFraction;
     }
-    public Fraction subtraction(Fraction f1 , Fraction f2){
+
+    public Fraction subtraction(Fraction f1, Fraction f2) {
         Fraction subtractionFraction = new Fraction();
         subtractionFraction.numerator = f1.numerator * f2.denominator - f2.numerator * f1.denominator;
         subtractionFraction.denominator = f1.denominator * f2.denominator;
         subtractionFraction.simplify();
         return subtractionFraction;
     }
-    public Fraction division(Fraction f1 , Fraction f2){
+
+    public Fraction division(Fraction f1, Fraction f2) {
         Fraction divisionFraction = new Fraction();
         divisionFraction.numerator = f1.numerator * f2.denominator;
         divisionFraction.denominator = f1.denominator * f2.numerator;
         divisionFraction.simplify();
         return divisionFraction;
     }
-    public Fraction multiplication(Fraction f1 , Fraction f2){
+
+    public Fraction multiplication(Fraction f1, Fraction f2) {
         Fraction multiplicationFraction = new Fraction();
         multiplicationFraction.numerator = f1.numerator * f2.numerator;
         multiplicationFraction.denominator = f1.denominator * f2.denominator;
@@ -77,6 +80,7 @@ public class Fraction {
             }
         }
     }
+
     //uoc chung lon nhat
     public int largestCommon(int a, int b) {
         a = Math.abs(a);
@@ -88,7 +92,8 @@ public class Fraction {
         }
         return a;
     }
-//so rut gon
+
+    //so rut gon
     public void simplify() {
         int ucln = largestCommon(numerator, denominator);
         numerator /= ucln;
@@ -108,13 +113,6 @@ public class Fraction {
             System.out.println(numerator + "/" + denominator);
         }
     }
-
-
-
-
-
-
-
 
 
     //----đã in ra kết quả rút gọn
@@ -147,9 +145,6 @@ public class Fraction {
 //            int y = denominator / ucln;
 //            System.out.println(x + "/" + y);
 //    }
-
-
-
 
 
 }
