@@ -2,7 +2,7 @@ package ss5_polymorphism.employee_manager;
 
 import java.util.Scanner;
 
-public class Employee {
+abstract public class Person implements Salary {
     // ===== Properties =====
     private String id;
     private String fullName;
@@ -11,10 +11,10 @@ public class Employee {
 
 
     // ===== Constructor =====
-    public Employee() {
+    public Person() {
     }
 
-    public Employee(String id, String fullName, String dayOfBirth, String address) {
+    public Person(String id, String fullName, String dayOfBirth, String address) {
         this.id = id;
         this.fullName = fullName;
         this.dayOfBirth = dayOfBirth;
@@ -23,6 +23,7 @@ public class Employee {
 
 
     // ===== Methods =====
+
     public void input() {
         Scanner sc = new Scanner(System.in);
 
@@ -36,6 +37,7 @@ public class Employee {
         this.address = sc.nextLine();
     }
 
+
     public void output() {
         System.out.println("Mã: " + this.id);
         System.out.println("Tên: " + this.fullName);
@@ -43,9 +45,7 @@ public class Employee {
         System.out.println("Địa chỉ: " + this.address);
     }
 
-    public double getSalary() {
-        return 0;
-    }
+    //public abstract double getSalary();
 
     // ===== Getter & Setter =====
     public String getId() {

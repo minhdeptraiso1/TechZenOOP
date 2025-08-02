@@ -2,7 +2,7 @@ package ss5_polymorphism.employee_manager;
 
 import java.util.Scanner;
 
-public class ProductionEmployee extends Employee {
+public class ProductionEmployee extends Person {
     private double numberProducts;
 
     public ProductionEmployee() {
@@ -23,8 +23,9 @@ public class ProductionEmployee extends Employee {
 
     @Override
     public void output() {
-        super.input();
+        super.output();
         System.out.println("Số sản phẩm: " + this.numberProducts);
+        System.out.println("Luơng: " + getSalary());
     }
 
     @Override

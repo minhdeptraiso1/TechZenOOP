@@ -2,7 +2,7 @@ package ss5_polymorphism.employee_manager;
 
 import java.util.Scanner;
 
-public class ManagementEmployee extends Employee {
+public class ManagementEmployee extends Person {
     private double basicSalary;
     private double coefficientSalary;
 

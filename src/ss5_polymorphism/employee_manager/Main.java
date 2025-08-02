@@ -59,7 +59,7 @@ public class Main {
 //    static ArrayList<ManagementEmployee> managementEmployees = new ArrayList<>();
 //    static ArrayList<ProductionEmployee> productionEmployees = new ArrayList<>();
 
-    static ArrayList<Employee> employees = new ArrayList<>();
+    static ArrayList<Person> employees = new ArrayList<>();
 
     public static void main(String[] args) {
         int choose;
@@ -139,7 +139,7 @@ public class Main {
 
     private static ArrayList<ManagementEmployee> getManagementEmployee() {
         ArrayList<ManagementEmployee> managementEmployees = new ArrayList<>();
-        for (Employee employee : employees) {
+        for (Person employee : employees) {
             if (employee instanceof ManagementEmployee) {
                 managementEmployees.add((ManagementEmployee) employee);
             }
@@ -150,7 +150,7 @@ public class Main {
 
     private static ArrayList<ProductionEmployee> getProductionEmployee() {
         ArrayList<ProductionEmployee> productionEmployees = new ArrayList<>();
-        for (Employee employee : employees) {
+        for (Person employee : employees) {
             if (employee instanceof ProductionEmployee) {
                 productionEmployees.add((ProductionEmployee) employee);
             }
@@ -199,8 +199,9 @@ public class Main {
         String id = sc.nextLine();
 
         if (id.startsWith("QL")) {
+            System.out.println("Da tim thay nhan vien voi id :" + id);
             boolean isExistEmployee = false;
-            for (Employee employee : employees) {
+            for (Person employee : employees) {
                 if (employee instanceof ManagementEmployee && employee.getId().equals(id)) {
                     isExistEmployee = true;
                     employee.input();
@@ -213,7 +214,8 @@ public class Main {
                 System.out.println("Không tìm thấy ID muốn cập nhật!");
             }
         } else if (id.startsWith("SX")) {
-            // logic cập nhật thông tin cho nhân viên sản xuất
+            System.out.println("Da tim thay nhan vien voi id :" + id);
+            updateEmployeeById(id, ProductionEmployee.class);
         } else {
             System.out.println("ID không hợp lệ!");
         }
@@ -234,16 +236,22 @@ public class Main {
 
                 switch (choose) {
                     case 1:
-                        int count = 1;
-                        for (Employee employee : employees) {
-                            if (employee instanceof ManagementEmployee) {
-                                System.out.println("Thông tin nhân viên thứ " + count++);
-                                employee.output();
-                            }
-                        }
+//                        int count = 1;
+//                        for (Employee employee : employees) {
+//                            if (employee instanceof ManagementEmployee) {
+//                                System.out.println("Thông tin nhân viên thứ " + count++);
+//                                employee.output();
+//                            }
+//                        }
+                        printList(employees, ManagementEmployee.class);
                         break;
                     case 2:
                         // logic show danh sách nhân viên sản xuất
+                        for (Person e : employees) {
+                            if (e instanceof ProductionEmployee x) {
+                                x.output();
+                            }
+                        }
                         break;
                     case 3:
                         for (int i = 0; i < employees.size(); i++) {
@@ -276,12 +284,20 @@ public class Main {
                 switch (choose) {
                     case 1:
                         // logic sắp xếp theo lương cho nhân viên quản lý
+                        //sortAllEmployeesManager();
+                        //util
+                        sortAllEmployeesUtil2(ManagementEmployee.class, employees);
                         break;
                     case 2:
                         // logic sắp xếp theo lương cho nhân viên sản xuất
+                        // sortAllEmployeesProduct();
+                        //util
+                        sortAllEmployeesUtil(ProductionEmployee.class, employees);
                         break;
                     case 3:
-                        sortAllEmployees();
+                        //sortAllEmployees();
+                        //util
+                        sortAllEmployeesUtil(Person.class, employees);
                         break;
                     case 4:
                         return;
@@ -291,6 +307,75 @@ public class Main {
             } while (choose < 1 || choose > 4);
         }
     }
+
+    private static void sortAllEmployeesManager() {
+        ArrayList<Person> x = new ArrayList<>();
+        for (Person e : employees) {
+            if (e instanceof ManagementEmployee me) {
+                x.add(me);
+            }
+        }
+
+        System.out.println("1. Tăng dần theo lương");
+        System.out.println("2. Giảm dần theo lương");
+        System.out.print("Chọn cách sắp xếp: ");
+        int choose = Integer.parseInt(sc.nextLine());
+
+        if (choose == 1) {
+            sortByFor(x, true);
+//            employees.sort((a, b) -> Double.compare(a.getSalary(), b.getSalary()));
+        } else if (choose == 2) {
+            sortByFor(x, false);
+//            employees.sort(Comparator.comparingDouble(Employee::getSalary).reversed());
+        } else {
+            System.out.println("Lựa chọn không hợp lệ, xin chọn lại!");
+            return;
+        }
+
+        System.out.println("----- Danh sách sau khi sắp xếp theo lương -----");
+        int count = 1;
+        for (Person employee : x) {
+            System.out.println("Thông tin nhân viên thứ " + count++);
+            employee.output();
+            System.out.println("Lương: " + employee.getSalary());
+            System.out.println();
+        }
+    }
+
+    private static void sortAllEmployeesProduct() {
+        ArrayList<Person> x = new ArrayList<>();
+        for (Person e : employees) {
+            if (e instanceof ProductionEmployee me) {
+                x.add(me);
+            }
+        }
+
+        System.out.println("1. Tăng dần theo lương");
+        System.out.println("2. Giảm dần theo lương");
+        System.out.print("Chọn cách sắp xếp: ");
+        int choose = Integer.parseInt(sc.nextLine());
+
+        if (choose == 1) {
+            sortByFor(x, true);
+//            employees.sort((a, b) -> Double.compare(a.getSalary(), b.getSalary()));
+        } else if (choose == 2) {
+            sortByFor(x, false);
+//            employees.sort(Comparator.comparingDouble(Employee::getSalary).reversed());
+        } else {
+            System.out.println("Lựa chọn không hợp lệ, xin chọn lại!");
+            return;
+        }
+
+        System.out.println("----- Danh sách sau khi sắp xếp theo lương -----");
+        int count = 1;
+        for (Person employee : x) {
+            System.out.println("Thông tin nhân viên thứ " + count++);
+            employee.output();
+            System.out.println("Lương: " + employee.getSalary());
+            System.out.println();
+        }
+    }
+
 
     private static void sortAllEmployees() {
         System.out.println("1. Tăng dần theo lương");
@@ -311,7 +396,7 @@ public class Main {
 
         System.out.println("----- Danh sách sau khi sắp xếp theo lương -----");
         int count = 1;
-        for (Employee employee : employees) {
+        for (Person employee : employees) {
             System.out.println("Thông tin nhân viên thứ " + count++);
             employee.output();
             System.out.println("Lương: " + employee.getSalary());
@@ -319,7 +404,118 @@ public class Main {
         }
     }
 
-    private static void sortByFor(List<Employee> list, boolean ascending) {
+
+    //sort list util1
+    private static <q extends Person> void sortAllEmployeesUtil(Class<q> clazz, ArrayList<Person> employees) {
+        ArrayList<Person> arraylistTemp;
+
+        if (clazz == Person.class) {
+            arraylistTemp = new ArrayList<>(employees);
+        } else {
+            // Nếu là class con thì lọc theo class con
+            arraylistTemp = new ArrayList<>();
+            for (Person e : employees) {
+                if (clazz.isInstance(e)) {
+                    arraylistTemp.add(e);
+                }
+            }
+        }
+        if (arraylistTemp.isEmpty()) {
+            System.out.println("Không có nhân viên nào !");
+            return;
+        }
+
+
+        System.out.println("1. Tăng dần theo lương");
+        System.out.println("2. Giảm dần theo lương");
+        System.out.print("Chọn cách sắp xếp: ");
+        int choose = Integer.parseInt(sc.nextLine());
+
+        if (choose == 1) {
+            sortByFor(arraylistTemp, true);
+        } else if (choose == 2) {
+            sortByFor(arraylistTemp, false);
+        } else {
+            System.out.println("Lựa chọn không hợp lệ, xin chọn lại!");
+            return;
+        }
+
+        System.out.println("----- Danh sách sau khi sắp xếp theo lương -----");
+        int count = 1;
+        for (Person employee : arraylistTemp) {
+            System.out.println("Thông tin nhân viên thứ " + count++);
+            employee.output();
+            System.out.println("Lương: " + employee.getSalary());
+            System.out.println();
+        }
+    }
+
+    //sort list util2
+    private static <T extends Person> void sortList(List<T> employeeList) {
+        System.out.println("1. Tăng dần theo lương");
+        System.out.println("2. Giảm dần theo lương");
+        System.out.print("Chọn cách sắp xếp: ");
+        int choose = Integer.parseInt(sc.nextLine());
+
+        if (choose == 1) {
+            sortByFor(employeeList, true);
+        } else if (choose == 2) {
+            sortByFor(employeeList, false);
+        } else {
+            System.out.println("Lựa chọn không hợp lệ, xin chọn lại!");
+            return;
+        }
+
+        System.out.println("----- Danh sách sau khi sắp xếp theo lương -----");
+        int count = 1;
+        for (T employee : employeeList) {
+            System.out.println("Thông tin nhân viên thứ " + count++);
+            employee.output();
+            System.out.println("Lương: " + employee.getSalary());
+            System.out.println();
+        }
+    }
+
+    //sort list util3
+    private static <q extends Person> void sortAllEmployeesUtil2(Class<q> clazz, ArrayList<Person> employees) {
+        ArrayList<Person> arraylistTemp;
+
+        if (clazz == Person.class) {
+            arraylistTemp = new ArrayList<>(employees);
+        } else {
+            // Nếu là class con thì lọc theo class con
+            arraylistTemp = new ArrayList<>();
+            for (Person e : employees) {
+                if (clazz.isInstance(e)) {
+                    arraylistTemp.add(e);
+                }
+            }
+        }
+        if (arraylistTemp.isEmpty()) {
+            System.out.println("Không có nhân viên nào !");
+            return;
+        }
+
+
+        System.out.println("1. Tăng dần theo lương");
+        System.out.println("2. Giảm dần theo lương");
+        System.out.print("Chọn cách sắp xếp: ");
+        int choose = Integer.parseInt(sc.nextLine());
+
+        if (choose == 1) {
+            sortByFor(arraylistTemp, true);
+        } else if (choose == 2) {
+            sortByFor(arraylistTemp, false);
+        } else {
+            System.out.println("Lựa chọn không hợp lệ, xin chọn lại!");
+            return;
+        }
+
+        System.out.println("----- Danh sách sau khi sắp xếp theo lương -----");
+        printList(arraylistTemp, clazz);
+    }
+
+    private static <T extends Person> void sortByFor(List<T> list, boolean ascending) {
         for (int i = 0; i < list.size() - 1; i++) {
             for (int j = i + 1; j < list.size(); j++) {
                 double salaryI = list.get(i).getSalary();
@@ -328,13 +524,128 @@ public class Main {
                 boolean needSwap = ascending
                         ? salaryI > salaryJ
                         : salaryI < salaryJ;
-
                 if (needSwap) {
-                    Employee temp = list.get(i);
+                    T temp = list.get(i);
                     list.set(i, list.get(j));
                     list.set(j, temp);
                 }
             }
         }
     }
+
+    //in ra
+    private static <T extends Person> void printList(List<T> list, Class<?> clazz) {
+        int count = 1;
+        for (T l : list) {
+            if (clazz.isInstance(l)) {
+                System.out.println("Nhan vien thu " + count);
+                l.output();
+                count++;
+            }
+        }
+    }
+
+    //update
+    private static <T extends Person> void updateEmployeeById(String id, Class<T> clazz) {
+        boolean found = false;
+
+        for (Person e : employees) {
+            if (clazz.isInstance(e) && e.getId().equals(id)) {
+                System.out.println("Nhập thông tin mới cho nhân viên:" + e.getId());
+                e.input();
+                System.out.println("✅ Cập nhật thành công!");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("❌ Không tìm thấy nhân viên có ID: " + id);
+        }
+    }
+
+    //update2
+    private static void updateEmployeeById2(String id) {
+        Class<? extends Person> clazz = getClassFromIdPrefix(id);
+
+        if (clazz == null) {
+            System.out.println("❌ Mã ID không hợp lệ hoặc không xác định được loại nhân viên!");
+            return;
+        }
+
+        boolean found = false;
+        for (Person e : employees) {
+            if (clazz.isInstance(e) && e.getId().equals(id)) {
+                System.out.println("Nhập thông tin mới cho nhân viên: " + e.getId());
+                e.input();
+                System.out.println("✅ Cập nhật thành công!");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("❌ Không tìm thấy nhân viên có ID: " + id);
+        }
+    }
+
+    private static Class<? extends Person> getClassFromIdPrefix(String id) {
+        if (id.startsWith("QL")) {
+            return ManagementEmployee.class;
+        } else if (id.startsWith("KT")) {
+            return ProductionEmployee.class;
+        } else {
+            return null;
+        }
+    }
+
+
+    //add
+    private static <T extends Person> void addEmployee(Class<T> clazz, String prefix) {
+        try {
+            // Khởi tạo object mới bằng reflection
+            T newMember = clazz.getDeclaredConstructor().newInstance();//getDeclaredContructor phai co trong truy vi khoi tao contructer rong nhung ko ton tai se loi
+
+            // Nhập thông tin và gán ID
+            newMember.input();
+            newMember.setId(getIdentityId(prefix, clazz));
+
+            employees.add(newMember);
+            System.out.println("✅ Thêm nhân viên mới thành công!");
+
+        } catch (Exception e) {
+            System.out.println("❌ Lỗi khi tạo đối tượng: " + e.getMessage());
+        }
+    }
+
+    //get id
+    private static String getIdentityId(String prefix, Class<?> clazz) {
+        int max = 0;
+
+        for (Person e : employees) {
+            if (clazz.isInstance(e)) {
+                String idStr = e.getId().substring(prefix.length());
+                int id = Integer.parseInt(idStr);
+                if (id > max) {
+                    max = id;
+                }
+            }
+        }
+
+        return String.format("%s%03d", prefix, max + 1);
+
+    }
+
+    //lay danh sach con trong list chung
+    private static <T extends Person> ArrayList<T> filterEmployee(Class<T> type) { // type = ManagementEmployee.class
+        ArrayList<T> result = new ArrayList<>();
+        for (Person employee : employees) {
+            if (type.isInstance(employee)) {
+                result.add(type.cast(employee));
+            }
+        }
+        return result;
+    }
+
 }
+
