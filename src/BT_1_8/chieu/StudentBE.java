@@ -3,59 +3,65 @@ package BT_1_8.chieu;
 import java.util.Scanner;
 
 public class StudentBE extends Student {
-    String ngonNguLapTrinh;
-    int soBuoiHoc;
+    private String progLanguage;
 
     public StudentBE() {
     }
 
-    public StudentBE(String id, String name, int age, String email, double diemTrungBinh, String ngonNguLapTrinh, int soBuoiHoc) {
-        super(id, name, age, email, diemTrungBinh);
-        this.ngonNguLapTrinh = ngonNguLapTrinh;
-        this.soBuoiHoc = soBuoiHoc;
+    public StudentBE(String id, String fullName, int age, String email, double avgScore, int sessionNumber, String progLanguage) {
+        super(id, fullName, age, email, avgScore, sessionNumber);
+        this.progLanguage = progLanguage;
     }
 
-    public String getNgonNguLapTrinh() {
-        return ngonNguLapTrinh;
+    public String getProgLanguage() {
+        return progLanguage;
     }
 
-    public void setNgonNguLapTrinh(String ngonNguLapTrinh) {
-        this.ngonNguLapTrinh = ngonNguLapTrinh;
+    public void setProgLanguage(String progLanguage) {
+        this.progLanguage = progLanguage;
+    }
+
+    @Override
+    public void setId(String id) {
+        super.setId("HVBE-00" + id);
+    }
+
+    @Override
+    public void input() {
+        Scanner sc = new Scanner(System.in);
+
+        super.input();
+
+        while (true) {
+            System.out.print("Nhập ngôn ngữ lập trình: ");
+            this.progLanguage = sc.nextLine().trim();
+            if (this.progLanguage.matches("[a-zA-Z\\s]+")) {
+                break;
+            } else {
+                System.out.println("Ngôn ngữ lập trình không hợp lệ! Không chứa Ký tự đặc biệt.\n");
+            }
+        }
+    }
+
+    @Override
+    public String getClassify() {
+        if (this.getAvgScore() >= 7.5) {
+            return "Giỏi";
+        } else if (this.getAvgScore() >= 5) {
+            return "Khá";
+        } else {
+            return "Trung Bình";
+        }
+    }
+
+    @Override
+    public double tuitionFee() {
+        return this.getSessionNumber() * 50000 * 0.9;
     }
 
     @Override
     public String toString() {
-        return super.toString() + String.format("  %-20s|", ngonNguLapTrinh);
-    }
-
-    public void printHeaderSBE() {
-        System.out.printf("| %10s | %-20s | %-8s | %-25s | %-10s | %-20s |\n",
-                "ID", "Họ tên", "Tuổi", "Email", "Điểm TB", "Ngôn ngữ lập trình");
-        System.out.println("------------------------------------------------------------------------------------------------------");
-    }
-
-    @Override
-    public void input(Scanner sc) {
-        super.input(sc);
-        System.out.print("Nhập ngôn ngữ lập trình: ");
-        this.ngonNguLapTrinh = sc.nextLine().trim();
-    }
-
-    @Override
-    public String xepLoai() {
-        String loai;
-        if (getDiemTrungBinh() >= 7.5) {
-            loai = "Giỏi";
-        } else if (getDiemTrungBinh() >= 5) {
-            loai = "Khá";
-        } else {
-            loai = "Trung bình";
-        }
-        return loai;
-    }
-
-    @Override
-    public double getTuition() {
-        return soBuoiHoc * 50000 * 90 / 100;
+        return super.toString()
+                + "Ngôn ngữ lập trình: " + this.progLanguage + "\n";
     }
 }

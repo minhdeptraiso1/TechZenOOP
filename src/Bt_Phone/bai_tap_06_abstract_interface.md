@@ -21,9 +21,6 @@ Chương trình quản lý điện thoại của một cửa hàng bán điện 
 
 #### Quy tắc tạo id tự động:
 
-- Điện thoại mới: DTMXXX (với XXX là số tự động tăng từ 000 đến 999)
-- Điện thoại cũ: DTCXXX (với XXX là số tự động tăng từ 000 đến 999)
-
 ### **[Mô tả thêm]**
 
 - Điện thoại mới có thêm: Số lượng

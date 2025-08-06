@@ -4,55 +4,58 @@ import java.util.Scanner;
 
 public abstract class Person {
     private String id;
-    private String name;
+    private String fullName;
     private int age;
     private String email;
 
     public Person() {
     }
 
-    public Person(String id, String name, int age, String email) {
+    public Person(String id, String fullName, int age, String email) {
         this.id = id;
-        this.name = name;
+        this.fullName = fullName;
         this.age = age;
         this.email = email;
-
     }
 
-    public void input(Scanner sc) {
-        // Nhập tên
+    public void input() {
+        Scanner sc = new Scanner(System.in);
+
         while (true) {
             System.out.print("Nhập tên: ");
-            this.name = sc.nextLine().trim();
-            if (this.name.matches("[a-zA-ZÀ-Ỹà-ỹ\\s]+")) break;
-            else System.out.println("❌ Tên không hợp lệ! Không chứa số hoặc ký tự đặc biệt.");
+            this.fullName = sc.nextLine().trim();
+            if (this.fullName.matches("[a-zA-ZÀ-Ỹà-ỹ\\s]+")) {
+                break;
+            } else {
+                System.out.println("Tên không hợp lệ! Không chứa số hoặc ký tự đặc biệt.\n");
+            }
         }
 
-        // Nhập tuổi
         while (true) {
             System.out.print("Nhập tuổi: ");
             if (sc.hasNextInt()) {
                 this.age = sc.nextInt();
                 if (this.age < 0) {
-                    System.out.println("❌ Tuổi không hợp lệ! Phải >= 0.");
+                    System.out.println("Tuổi không hợp lệ! Phải >= 0.\n");
                     continue;
                 }
-                sc.nextLine(); // Clear buffer
+                sc.nextLine();
                 break;
             } else {
-                System.out.println("❌ Tuổi không hợp lệ! Nhập số nguyên.");
-                sc.nextLine(); // Clear buffer
+                System.out.println("Tuổi không hợp lệ! Nhập số nguyên.\n");
+                sc.nextLine();
             }
         }
-        // Nhập email
+
         while (true) {
             System.out.print("Nhập email: ");
             this.email = sc.nextLine().trim();
-            if (this.email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$")) break;
-            else System.out.println("❌ Email không hợp lệ! Vui lòng nhập đúng định dạng (vd: ten@gmail.com).");
+            if (this.email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$")) {
+                break;
+            } else {
+                System.out.println("Email không hợp lệ! Vui lòng nhập đúng định dạng (vd: ten@gmail.com).\n");
+            }
         }
-
-
     }
 
     public String getId() {
@@ -63,12 +66,12 @@ public abstract class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public int getAge() {
@@ -87,9 +90,11 @@ public abstract class Person {
         this.email = email;
     }
 
-    // ===== toString (tuỳ chọn) =====
     @Override
     public String toString() {
-        return String.format("| %-6s | %-20s | %-8d | %-25s", id, name, age, email);
+        return "ID: " + id + "\n"
+                + "Họ tên: " + fullName + "\n"
+                + "Tuổi: " + age + "\n"
+                + "Email: " + email + "\n";
     }
 }

@@ -2,10 +2,11 @@ package Bt_Phone;
 
 import java.util.Scanner;
 
+//khooi tao Scanner final de xai cho tat ca cac con
 abstract class Phone {
     private String phoneId;         //id
     private String phoneName;       //ten dien thoai
-    private String phonePrice;      //gia
+    private double phonePrice;      //gia
     private String phoneWarranty;   //thoi gian bao hanh
     private String phoneType;       //loai dien thoai : androi/ios
     private String phoneCompany;    //hãng dien thoai : IPhone/xiaomi
@@ -13,7 +14,7 @@ abstract class Phone {
     public Phone() {
     }
 
-    public Phone(String phoneId, String phoneName, String phonePrice, String phoneWarranty, String phoneType, String phoneCompany) {
+    public Phone(String phoneId, String phoneName, double phonePrice, String phoneWarranty, String phoneType, String phoneCompany) {
         this.phoneId = phoneId;
         this.phoneName = phoneName;
         this.phonePrice = phonePrice;
@@ -26,7 +27,7 @@ abstract class Phone {
         while (true) {
             System.out.println("Nhập tên điện thoại");
             this.phoneName = sc.nextLine().trim();
-            if (this.phoneName.matches("[a-zA-Zà-ỹà-ỹ0-9\\s]")) {
+            if (this.phoneName.matches("[a-zA-ZÀ-ỹ0-9\\s]+")) {
                 break;
             } else {
                 System.out.println("Tên không hợp lệ! \n Vui lòn nhập lại!");
@@ -34,17 +35,18 @@ abstract class Phone {
         }
         while (true) {
             System.out.println("Nhập giá của điện thoại");
-            this.phonePrice = sc.nextLine().trim();
-            if (this.phonePrice.matches("[0-9\\s]")) {
+            String p = sc.nextLine().trim();
+            if (p.matches("\\d+")) {
+                this.phonePrice = Integer.parseInt(p);
                 break;
             } else {
                 System.out.println("Giá không hợp lệ! \n Vui lòng nhập lại!");
             }
         }
         while (true) {
-            System.out.println("Nhập thời gian bảo hành");
+            System.out.println("Nhập thời gian bảo hành (tháng)");
             this.phoneWarranty = sc.nextLine().trim();
-            if (this.phoneWarranty.matches("a-zA-Zà-ỹà-ỹ0-9\\s]")) {
+            if (this.phoneWarranty.matches("\\d{2}")) {
                 break;
             } else {
                 System.out.println("Thời gian không hợp lệ!\n Vui lòng nhập lại!");
@@ -66,7 +68,7 @@ abstract class Phone {
         while (true) {
             System.out.println("Nhập hãng điện thoại:");
             this.phoneCompany = sc.nextLine().trim();
-            if (this.phoneCompany.matches("[a-zÀ-Ỹà-ỹA-Z\\s]")) {
+            if (this.phoneCompany.matches("[a-zÀ-ỹA-Z\\s]+")) {
                 break;
             } else {
                 System.out.println("Hãng không hợp lệ! \n Vui lòng nhập lại!");
@@ -74,6 +76,8 @@ abstract class Phone {
 
         }
     }
+
+    public abstract double phonePrice();
 
     public void output() {
         System.out.println("Id : " + this.phoneId);
@@ -100,11 +104,11 @@ abstract class Phone {
         this.phoneName = phoneName;
     }
 
-    public String getPhonePrice() {
+    public double getPhonePrice() {
         return phonePrice;
     }
 
-    public void setPhonePrice(String phonePrice) {
+    public void setPhonePrice(double phonePrice) {
         this.phonePrice = phonePrice;
     }
 
