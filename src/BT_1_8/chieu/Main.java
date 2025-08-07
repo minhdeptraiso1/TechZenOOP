@@ -3,9 +3,7 @@ package BT_1_8.chieu;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
@@ -13,54 +11,252 @@ public class Main {
     static ArrayList<Course> courses = new ArrayList<>();
     static LinkedList<Schedule> schedules = new LinkedList<>();
 
+// Thay thế method initializeSampleData() trong Main.java bằng code này
+
     private static void initializeSampleData() {
-        // Create Lecturers first (for Teaching Assistants to reference)
-        Lecturer lecturer1 = new Lecturer("L001", "Dr. John Smith", 45, "john.smith@university.edu",
-                40, "Computer Science");
-        Lecturer lecturer2 = new Lecturer("L002", "Prof. Sarah Johnson", 38, "sarah.johnson@university.edu",
-                35, "Software Engineering");
-        Lecturer lecturer3 = new Lecturer("L003", "Dr. Michael Brown", 42, "michael.brown@university.edu",
-                38, "Database Systems");
+        System.out.println("🔄 Đang khởi tạo dữ liệu test toàn diện...");
 
-        // Add Backend Students
-        persons.add(new StudentBE("BE001", "Alice Chen", 22, "alice.chen@student.edu",
-                8.7, 45, "Java"));
-        persons.add(new StudentBE("BE002", "Bob Wilson", 23, "bob.wilson@student.edu",
-                7.2, 42, "Python"));
-        persons.add(new StudentBE("BE003", "Charlie Davis", 21, "charlie.davis@student.edu",
-                6.8, 38, "C#"));
-        persons.add(new StudentBE("BE004", "Diana Lee", 24, "diana.lee@student.edu",
-                9.1, 48, "Java"));
+        // ==================== TẠO LECTURERS TRƯỚC ====================
+        System.out.println("📚 Tạo danh sách Giảng viên...");
 
-        // Add Fullstack Students
-        persons.add(new StudentFS("FS001", "Eva Martinez", 23, "eva.martinez@student.edu",
-                8.3, 50, 3));
-        persons.add(new StudentFS("FS002", "Frank Thompson", 22, "frank.thompson@student.edu",
-                7.9, 47, 2));
-        persons.add(new StudentFS("FS003", "Grace Kim", 25, "grace.kim@student.edu",
-                8.8, 52, 5));
-        persons.add(new StudentFS("FS004", "Henry Garcia", 24, "henry.garcia@student.edu",
-                6.5, 44, 1));
+        Lecturer lecturer1 = new Lecturer("L001", "Dr. Nguyễn Văn An", 45, "nva@techzen.edu.vn", 40, "Java Programming");
+        Lecturer lecturer2 = new Lecturer("L002", "Prof. Trần Thị Bình", 38, "ttb@techzen.edu.vn", 35, "Web Development");
+        Lecturer lecturer3 = new Lecturer("L003", "Dr. Lê Minh Cường", 42, "lmc@techzen.edu.vn", 38, "Database Management");
+        Lecturer lecturer4 = new Lecturer("L004", "MSc. Phạm Thị Dung", 35, "ptd@techzen.edu.vn", 30, "Mobile Development");
+        Lecturer lecturer5 = new Lecturer("L005", "Dr. Hoàng Văn Em", 50, "hve@techzen.edu.vn", 25, "System Architecture");
 
-        // Add Lecturers
         persons.add(lecturer1);
         persons.add(lecturer2);
         persons.add(lecturer3);
+        persons.add(lecturer4);
+        persons.add(lecturer5);
 
-        // Add Teaching Assistants
-        TeachingAssistant ta1 = new TeachingAssistant("TA001", "Ivan Petrov", 26,
-                "ivan.petrov@university.edu", 20, 15);
-        ta1.addLecture(lecturer1);
-        ta1.addLecture(lecturer2);
+        // ==================== TẠO BACKEND STUDENTS ====================
+        System.out.println("💻 Tạo danh sách Học viên Backend...");
 
-        TeachingAssistant ta2 = new TeachingAssistant("TA002", "Julia Wang", 25,
-                "julia.wang@university.edu", 18, 12);
-        ta2.addLecture(lecturer2);
-        ta2.addLecture(lecturer3);
+        // Nhóm học viên giỏi
+        persons.add(new StudentBE("BE001", "Nguyễn Minh Anh", 22, "nma@student.edu.vn", 8.7, 45, "Java"));
+        persons.add(new StudentBE("BE002", "Trần Văn Bách", 23, "tvb@student.edu.vn", 8.2, 42, "Python"));
+        persons.add(new StudentBE("BE003", "Lê Thị Cẩm", 21, "ltc@student.edu.vn", 9.1, 48, "Java"));
+        persons.add(new StudentBE("BE004", "Phạm Minh Đức", 24, "pmd@student.edu.vn", 8.9, 46, "C#"));
+
+        // Nhóm học viên khá
+        persons.add(new StudentBE("BE005", "Hoàng Thị Lan", 22, "htl@student.edu.vn", 7.2, 40, "Python"));
+        persons.add(new StudentBE("BE006", "Vũ Văn Nam", 25, "vvn@student.edu.vn", 6.8, 38, "Java"));
+        persons.add(new StudentBE("BE007", "Đặng Thị Oanh", 23, "dto@student.edu.vn", 7.5, 43, "C#"));
+
+        // Nhóm học viên trung bình
+        persons.add(new StudentBE("BE008", "Ngô Văn Phong", 26, "nvp@student.edu.vn", 5.5, 35, "Python"));
+        persons.add(new StudentBE("BE009", "Bùi Thị Quỳnh", 24, "btq@student.edu.vn", 6.2, 39, "Java"));
+        persons.add(new StudentBE("BE010", "Mai Văn Sơn", 22, "mvs@student.edu.vn", 5.8, 36, "C#"));
+
+        // ==================== TẠO FULLSTACK STUDENTS ====================
+        System.out.println("🌐 Tạo danh sách Học viên Fullstack...");
+
+        // Nhóm học viên giỏi (>= 2 projects và >= 8 điểm)
+        persons.add(new StudentFS("FS001", "Đỗ Minh Tuấn", 23, "dmt@student.edu.vn", 8.3, 50, 3));
+        persons.add(new StudentFS("FS002", "Lý Thị Uyên", 22, "ltu@student.edu.vn", 8.8, 52, 4));
+        persons.add(new StudentFS("FS003", "Trịnh Văn Việt", 25, "tvv@student.edu.vn", 8.5, 48, 2));
+        persons.add(new StudentFS("FS004", "Chu Thị Xuân", 24, "ctx@student.edu.vn", 9.0, 55, 5));
+
+        // Nhóm học viên khá (>= 6.5 điểm)
+        persons.add(new StudentFS("FS005", "Đinh Văn Yến", 23, "dvy@student.edu.vn", 7.9, 47, 2));
+        persons.add(new StudentFS("FS006", "Phan Thị Anh", 26, "pta@student.edu.vn", 7.2, 44, 1));
+        persons.add(new StudentFS("FS007", "Lương Văn Bình", 24, "lvb@student.edu.vn", 6.8, 41, 0));
+
+        // Nhóm học viên trung bình (< 6.5 điểm)
+        persons.add(new StudentFS("FS008", "Tô Thị Cúc", 25, "ttc@student.edu.vn", 6.5, 40, 1));
+        persons.add(new StudentFS("FS009", "Võ Văn Đạt", 22, "vvd@student.edu.vn", 5.9, 35, 0));
+        persons.add(new StudentFS("FS010", "Hồ Thị Nga", 27, "htn@student.edu.vn", 6.1, 38, 1));
+
+        // ==================== TẠO TEACHING ASSISTANTS ====================
+        System.out.println("👨‍🏫 Tạo danh sách Trợ giảng...");
+
+        TeachingAssistant ta1 = new TeachingAssistant("TA001", "Nguyễn Thành An", 26, "nta@techzen.edu.vn", 20, 15);
+        ta1.addLecture(lecturer1); // Hỗ trợ Dr. Nguyễn Văn An
+        ta1.addLecture(lecturer2); // Hỗ trợ Prof. Trần Thị Bình
+
+        TeachingAssistant ta2 = new TeachingAssistant("TA002", "Lê Minh Bảo", 25, "lmb@techzen.edu.vn", 18, 12);
+        ta2.addLecture(lecturer2); // Hỗ trợ Prof. Trần Thị Bình
+        ta2.addLecture(lecturer3); // Hỗ trợ Dr. Lê Minh Cường
+
+        TeachingAssistant ta3 = new TeachingAssistant("TA003", "Phạm Thị Cẩm", 27, "ptc@techzen.edu.vn", 22, 18);
+        ta3.addLecture(lecturer1); // Hỗ trợ Dr. Nguyễn Văn An
+        ta3.addLecture(lecturer4); // Hỗ trợ MSc. Phạm Thị Dung
+        ta3.addLecture(lecturer5); // Hỗ trợ Dr. Hoàng Văn Em
+
+        TeachingAssistant ta4 = new TeachingAssistant("TA004", "Trần Văn Dũng", 24, "tvd@techzen.edu.vn", 15, 10);
+        ta4.addLecture(lecturer3); // Chỉ hỗ trợ Dr. Lê Minh Cường
 
         persons.add(ta1);
         persons.add(ta2);
+        persons.add(ta3);
+        persons.add(ta4);
+
+        // ==================== TẠO COURSES VÀ PHÂN LỚP ====================
+        System.out.println("🏫 Tạo danh sách Khóa học và phân lớp...");
+
+        // Khóa học 1: Java Backend
+        Course course1 = new Course("C-001", "Java Backend Development");
+        course1.setStudents((StudentBE) findPersonById("HVBE-00BE001")); // Nguyễn Minh Anh
+        course1.setStudents((StudentBE) findPersonById("HVBE-00BE003")); // Lê Thị Cẩm
+        course1.setStudents((StudentBE) findPersonById("HVBE-00BE004")); // Phạm Minh Đức
+        course1.setStudents((StudentBE) findPersonById("HVBE-00BE006")); // Vũ Văn Nam
+        course1.setStudents((StudentBE) findPersonById("HVBE-00BE009")); // Bùi Thị Quỳnh
+        courses.add(course1);
+
+        // Khóa học 2: Python Backend
+        Course course2 = new Course("C-002", "Python Backend Development");
+        course2.setStudents((StudentBE) findPersonById("HVBE-00BE002")); // Trần Văn Bách
+        course2.setStudents((StudentBE) findPersonById("HVBE-00BE005")); // Hoàng Thị Lan
+        course2.setStudents((StudentBE) findPersonById("HVBE-00BE008")); // Ngô Văn Phong
+        courses.add(course2);
+
+        // Khóa học 3: Fullstack Web Development
+        Course course3 = new Course("C-003", "Fullstack Web Development");
+        course3.setStudents((StudentFS) findPersonById("HVFS-00FS001")); // Đỗ Minh Tuấn
+        course3.setStudents((StudentFS) findPersonById("HVFS-00FS002")); // Lý Thị Uyên
+        course3.setStudents((StudentFS) findPersonById("HVFS-00FS003")); // Trịnh Văn Việt
+        course3.setStudents((StudentFS) findPersonById("HVFS-00FS004")); // Chu Thị Xuân
+        course3.setStudents((StudentFS) findPersonById("HVFS-00FS005")); // Đinh Văn Yến
+        courses.add(course3);
+
+        // Khóa học 4: Advanced Fullstack
+        Course course4 = new Course("C-004", "Advanced Fullstack Development");
+        course4.setStudents((StudentFS) findPersonById("HVFS-00FS006")); // Phan Thị Anh
+        course4.setStudents((StudentFS) findPersonById("HVFS-00FS007")); // Lương Văn Bình
+        course4.setStudents((StudentFS) findPersonById("HVFS-00FS008")); // Tô Thị Cúc
+        courses.add(course4);
+
+        // Khóa học 5: Mobile Development (để test không có học viên)
+        Course course5 = new Course("C-005", "Mobile App Development");
+        courses.add(course5);
+
+        // ==================== TẠO LỊCH GIẢNG DẠY ====================
+        System.out.println("📅 Tạo lịch giảng dạy...");
+
+        // Tháng 8/2025
+        schedules.add(new Schedule(LocalDate.of(2025, 8, 12), "Giới thiệu Java OOP - Lớp Backend"));
+        schedules.add(new Schedule(LocalDate.of(2025, 8, 13), "Database Design - Lớp Backend"));
+        schedules.add(new Schedule(LocalDate.of(2025, 8, 14), "HTML/CSS Fundamentals - Lớp Fullstack"));
+        schedules.add(new Schedule(LocalDate.of(2025, 8, 15), "JavaScript ES6+ - Lớp Fullstack"));
+        schedules.add(new Schedule(LocalDate.of(2025, 8, 16), "Spring Boot Framework - Lớp Backend"));
+
+        // Tháng 8/2025 - Thêm lịch trùng để test chức năng 17
+        schedules.add(new Schedule(LocalDate.of(2025, 8, 13), "Python Flask Workshop - Lớp Python")); // TRÙNG NGÀY
+        schedules.add(new Schedule(LocalDate.of(2025, 8, 15), "React.js Components - Lớp Fullstack")); // TRÙNG NGÀY
+
+        // Tháng 9/2025
+        schedules.add(new Schedule(LocalDate.of(2025, 9, 2), "Microservices Architecture"));
+        schedules.add(new Schedule(LocalDate.of(2025, 9, 5), "Docker & Kubernetes"));
+        schedules.add(new Schedule(LocalDate.of(2025, 9, 10), "CI/CD Pipeline Setup"));
+
+        // ==================== TẠO DỮ LIỆU ĐỂ TEST EDGE CASES ====================
+        System.out.println("⚠️ Tạo dữ liệu test các trường hợp đặc biệt...");
+
+        // Thêm học viên có tên trùng để test chức năng 16
+        persons.add(new StudentBE("BE011", "Nguyễn Minh Anh", 25, "nma2@student.edu.vn", 7.0, 40, "Java")); // TRÙNG TÊN
+        persons.add(new StudentFS("FS011", "Lê Thị Cẩm", 24, "ltc2@student.edu.vn", 8.0, 45, 2)); // TRÙNG TÊN
+
+        // Thêm vào cùng lớp để test duplicate trong class
+        course1.setStudents((StudentBE) findPersonById("HVBE-00BE011")); // Thêm Nguyễn Minh Anh thứ 2 vào lớp Java Backend
+
+        System.out.println("✅ Khởi tạo dữ liệu test hoàn tất!");
+        System.out.println("📊 Thống kê dữ liệu test:");
+        System.out.println("   👨‍🎓 Học viên BE: " + getList(StudentBE.class).size());
+        System.out.println("   👩‍💻 Học viên FS: " + getList(StudentFS.class).size());
+        System.out.println("   👨‍🏫 Giảng viên: " + getList(Lecturer.class).size());
+        System.out.println("   👨‍💼 Trợ giảng: " + getList(TeachingAssistant.class).size());
+        System.out.println("   🏫 Khóa học: " + courses.size());
+        System.out.println("   📅 Lịch dạy: " + schedules.size());
+        System.out.println("   ⚠️ Lịch trùng ngày: 2 ngày (13/08 và 15/08)");
+        System.out.println("   ⚠️ Học viên trùng tên: 2 cặp");
+        System.out.println();
     }
+
+    // Helper method để tìm person theo ID
+    private static Person findPersonById(String id) {
+        return persons.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+// ==================== DỮ LIỆU TEST CHO TỪNG CHỨC NĂNG ====================
+
+/*
+🧪 HƯỚNG DẪN TEST CÁC CHỨC NĂNG:
+
+1. THÊM THÀNH VIÊN (1):
+   - Test validation với dữ liệu sai: tên có số, email sai format, tuổi âm
+
+2. HIỂN THỊ DANH SÁCH (2):
+   - Có đầy đủ dữ liệu để test tất cả loại thành viên
+
+3. TÌM KIẾM (3):
+   - Test theo tên: "Nguyễn Minh Anh" (sẽ ra 2 kết quả - test trùng tên)
+   - Test theo email: "nva@techzen.edu.vn"
+   - Test không tìm thấy: "Không tồn tại"
+
+4. CẬP NHẬT THÔNG TIN (4):
+   - Test với ID: "HVBE-00BE001", "GV-00L001"
+
+5. XÓA THÀNH VIÊN (5):
+   - Test xóa lecturer có trợ giảng: "GV-00L001"
+   - Test xóa student: "HVBE-00BE010"
+
+6. SẮP XẾP THEO ĐIỂM (6):
+   - Backend: từ 5.5 → 9.1 điểm
+   - Fullstack: từ 5.9 → 9.0 điểm
+
+7. TÍNH HỌC PHÍ (7):
+   - Backend: 10 học viên với số buổi khác nhau
+   - Fullstack: 10 học viên với số buổi khác nhau
+
+8. TÍNH LƯƠNG (8):
+   - Lecturer: 5 giảng viên với giờ dạy khác nhau
+   - TA: 4 trợ giảng với giờ dạy khác nhau
+
+9. TÌM TRỢ GIẢNG CUA GV (9):
+   - Test: "GV-00L001" → có 2 trợ giảng
+   - Test: "GV-00L002" → có 2 trợ giảng
+   - Test: "GV-00L005" → có 1 trợ giảng
+
+10. TẠO LỚP HỌC (10):
+    - Đã có 5 lớp mẫu
+
+11. THÊM HV VÀO LỚP (11):
+    - Còn 2 BE students và 2 FS students chưa có lớp
+
+12. HV ĐIỂM CAO NHẤT (12):
+    - Lớp C-001: Lê Thị Cẩm (9.1 điểm)
+    - Lớp C-003: Chu Thị Xuân (9.0 điểm)
+
+13. THÊM BUỔI GIẢNG (13):
+    - Đã có 10 buổi mẫu
+
+14. XÓA BUỔI GIẢNG (14):
+    - Test xóa: 13/08/2025 (có 2 buổi trùng)
+    - Test xóa: 15/08/2025 (có 2 buổi trùng)
+
+15. HIỂN THỊ LỊCH (15):
+    - Có 10 buổi giảng từ 8/2025 → 9/2025
+
+16. KIỂM TRA HV TRÙNG TÊN (16):
+    - Lớp C-001: có "Nguyễn Minh Anh" trùng tên
+
+17. KIỂM TRA LỊCH TRÙNG (17):
+    - Có trùng ngày: 13/08/2025 và 15/08/2025
+
+18. TRA CỨU LỚP (18):
+    - Test: "C-001", "c-003" (test case insensitive)
+    - Test không tìm thấy: "C-999"
+
+19. QUẢN LÝ LỊCH GIẢNG (19):
+    - Test thêm lịch mới với lecturer
+    - Test tìm theo ngày: 13/08/2025
+*/
+
 
     private static void mainMenu() {
 
@@ -82,7 +278,11 @@ public class Main {
         System.out.println("13. Thêm buổi giảng mới");
         System.out.println("14. Xóa buổi giảng theo ngày");
         System.out.println("15. Hiển thị toàn bộ lịch");
-        System.out.println("16. Thoát chương trình");
+        System.out.println("16. Kiểm tra học viên trùng tên");
+        System.out.println("17. Kiểm tra lịch học trùng ngày");
+        System.out.println("18. Tra cứu lớp học");
+        System.out.println("19. Quản lý lịch giảng dạy");
+        System.out.println("20. Thoát chương trình");
     }
 
     // 1 Quân
@@ -777,6 +977,191 @@ public class Main {
         }
     }
 
+    //add to class
+    // 16. Kiểm tra lớp học có đảm bảo không có học viên trùng
+    private static void checkClassHasDuplicateStudent() {
+        Set<String> uniqueNames = new HashSet<>();
+        Set<String> duplicates = new HashSet<>();
+
+        for (Person p : persons) {
+            if (p instanceof Student) {
+                if (!uniqueNames.add(p.getFullName())) {
+                    duplicates.add(p.getFullName());
+                }
+            }
+        }
+
+        if (duplicates.isEmpty()) {
+            System.out.println("Không có danh sách trùng!");
+        } else {
+            System.out.println("Tên bị trùng: " + duplicates);
+        }
+    }
+
+    //17
+    private static void checkClassHasDuplicateSchedule() {
+        Set<LocalDate> uniqueDay = new HashSet<>();
+        Set<LocalDate> duplicates = new HashSet<>();
+
+        for (Schedule p : schedules) {
+            LocalDate day = p.getDay();
+            if (day != null) {
+                // Nếu add trả về false nghĩa là đã tồn tại trong uniqueDay → trùng
+                if (!uniqueDay.add(day)) {
+                    duplicates.add(day);
+                }
+            }
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        if (duplicates.isEmpty()) {
+            System.out.println("Không có ngày trùng trong lịch!");
+        } else {
+            System.out.print("Các ngày bị trùng: ");
+            for (LocalDate d : duplicates) {
+                System.out.print(d.format(formatter) + "  ");
+            }
+            System.out.println();
+        }
+    }
+
+    //18
+    private static void lookUpClass() {
+        HashMap<String, ArrayList<Student>> courseMap = new HashMap<>();
+        for (Course c : courses) {
+            ArrayList<Student> students = c.getStudents();
+            if (students == null) {
+                students = new ArrayList<>();
+            }
+            courseMap.put(c.getId(), students);
+        }
+
+        System.out.println("Nhập mã lớp:");
+        String searchId = sc.nextLine().trim();
+
+        if (courseMap.containsKey(searchId)) {
+            ArrayList<Student> found = courseMap.get(searchId);
+            System.out.println("Tìm thấy lớp với mã: " + searchId);
+            System.out.println("Danh sách sinh viên:");
+            for (Student s : found) {
+                if (s != null) {
+                    System.out.println(" - " + s);
+                }
+            }
+        } else {
+            System.out.println("Không tìm thấy lớp có mã: " + searchId);
+        }
+
+//        System.out.println("\nDanh sách tất cả các lớp:");
+//        for (Map.Entry<String, ArrayList<Student>> entry : courseMap.entrySet()) {
+//            System.out.println("Mã lớp: " + entry.getKey());
+//            System.out.println("Danh sách sinh viên:");
+//            for (Student s : entry.getValue()) {
+//                if (s != null) {
+//                    System.out.println(" - " + s);
+//                }
+//            }
+//            System.out.println("-------------------------");
+//        }
+    }
+
+
+    //19
+    private static void manageTeachingSchedule() {
+        HashMap<Schedule, Lecturer> manage = new HashMap<>();
+        while (true) {
+            System.out.println("1. Thêm lịch giảng mới");
+            System.out.println("2. Hiển thị toàn bộ lịch và giảng viên");
+            System.out.println("3. Tìm giảng viên theo lịch");
+            System.out.println("4. Thoát");
+            System.out.print("Chọn chức năng: ");
+
+            int choice = Integer.parseInt(sc.nextLine());
+
+            switch (choice) {
+                case 1:
+                    Schedule newSchedule = new Schedule();
+                    newSchedule.input();
+                    System.out.print("Nhập ID giảng viên phụ trách: ");
+                    String lecturerId = sc.nextLine();
+                    Lecturer assignedLecturer = findLecturerById(lecturerId);
+                    if (assignedLecturer != null) {
+                        manage.put(newSchedule, assignedLecturer);
+                        System.out.println("Thêm lịch giảng thành công!");
+                    } else {
+                        System.out.println("Không tìm thấy giảng viên với ID này.");
+                    }
+                    break;
+                case 2:
+                    if (manage.isEmpty()) {
+                        System.out.println("Chưa có lịch giảng nào.");
+                    } else {
+                        for (Map.Entry<Schedule, Lecturer> entry : manage.entrySet()) {
+                            System.out.println("Lịch: " + entry.getKey());
+                            System.out.println("Giảng viên: " + entry.getValue());
+                            System.out.println("-------------------");
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.print("Nhập ngày dạy cần tìm (dd/MM/yyyy): ");
+                    String inputDate = sc.nextLine().trim();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate date;
+
+                    try {
+                        date = LocalDate.parse(inputDate, formatter);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Ngày nhập không hợp lệ!");
+                        return;
+                    }
+
+                    boolean found = false;
+                    for (Map.Entry<Schedule, Lecturer> entry : manage.entrySet()) {
+                        Schedule schedule = entry.getKey();
+
+                        if (schedule.getDay() != null && schedule.getDay().equals(date)) {
+                            Lecturer lecturer = entry.getValue();
+                            System.out.println("Lịch dạy ngày " + date.format(formatter) + " do giảng viên: " + lecturer.getFullName() + " phụ trách.");
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("Không tìm thấy lịch dạy nào vào ngày " + inputDate);
+                    }
+
+                case 4:
+                    System.out.println("Thoát chương trình quản lý lịch giảng.");
+                    return;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ!");
+            }
+        }
+    }
+
+
+    private static Lecturer findLecturerById(String id) {
+        for (Person p : persons) {
+            if (p instanceof Lecturer lecturer && lecturer.getId().equalsIgnoreCase(id)) {
+                return lecturer;
+            }
+        }
+        return null;
+    }
+
+
+    private static void exit() {
+        System.out.println("Xác nhận thoát (Y/N)");
+        String confirm = sc.nextLine().trim().toLowerCase();
+        if (confirm.equalsIgnoreCase("y")) {
+            System.exit(0);
+        }
+    }
+
+
     public static void main(String[] args) {
         initializeSampleData();
         int choice;
@@ -801,10 +1186,11 @@ public class Main {
                 case 13 -> addSchedule();
                 case 14 -> deleteSchedule();
                 case 15 -> displaySchedule();
-                case 16 -> {
-                    System.err.println("Kết thúc chương trình!");
-                    return;
-                }
+                case 16 -> checkClassHasDuplicateStudent();
+                case 17 -> checkClassHasDuplicateSchedule();
+                case 18 -> lookUpClass();
+                case 19 -> manageTeachingSchedule();
+                case 20 -> exit();
                 default -> System.out.println("Lựa chọn không hợp lệ xin chọn lại!\n");
             }
         }
