@@ -1,0 +1,75 @@
+####constructor
+-trùng tên với class và khai báo : public + tên class ! ko được co kiểu trả về
+    +!có kiểu trả về sẽ thành phương thức!
+- có thể khai báo nhiều constructor
+    +VD classs :public studen(string name){this.name = name}--obejct : studen a = new student (Minh);
+        class: public studen(string name,int age){this.name = name;this.age = age}--obejct : studen a = new student (Minh,21);
+- mặc định constractor là ko có tham số --obejct : studen a = new student ();
+- có thể gọi constructor khác nhưng phải đặt đầu tiên trong boddy
+    +this hàm con
+    +super hàm cha
+    VD : public studen(string name,int age){
+            this.name = name ; this.age = age;
+            }
+         public studen(string name , int age, string hoppy){
+             this(name,age);
+             this.hoppy = hoppy;
+         }
+-- dùng generate để tạo constuctor trong java --
+
+####Tính bao đóng/đóng gói
+access modifier         / trong lớp         / trong package         / ngoài package bởi lớp con         /ngoài package
+private                     Y                   N                           N                                   N
+default                     Y                   Y                           N                                   N
+protected                   Y                   Y                           Y                                   N
+public                      Y                   Y                           Y                                   Y
+!!!!!!!!!!!!!!!có 4 phạm vi nhưng default là mặc định ko cần khai báo.!!!!!!!!!!!!!!!!!
+-là k thuật che dấu thông tin của đối tượng
+    +ko cho phép thay đổi trực tiếp giá trị thuộc tính của đối tượng
+
+--để đạt đc tính bao óng
+    + dùng access modifier hợp lý cho từng thuộc tính (name id ...)
+    +gián giá trị khi khai báo private dùng getter(lấy giá trị ra) và setter( đặt giá trị vào)
+
+####Static
+-là từ khóa để khai báo thuộc tính và phương thức thuộc về class
+-truy xuất thành phần static(thuộc tính , phương thức ) thông qua tên class,hoặc có thể thông qua đối tượng
+-mục đích
+    + định nghĩa thuốc tính và phương thức chung  của toàn bộ đối tượng
+    + tọa ra cá lớp tiện ích
+    +tiết kiệm bộ nhớ
+
+!!!! tạo static gán giá trị giống nhau => tiết kiệm bộ nhớ vì ko cần cấp phát bộ nhớ về mục đó của đối tượng
+!!!! có static có thể gọi thẳng trực tiếp từ class ra dùng /là class tiện ích(có thể tự tạo / gọi dùng có sẵn)
+
+--tạo class tiện ích -- dùng static cho methor và private constructor lass để chặn quyền khởi tạo tránh tốn ô nhớ
+--ko có static cần khởi tạo đối tượng mới dùng dc . có static dùng tên class rồi gọi.
+    --icon V là biến nội bộ trong methor
+    --icon F biến toàn cục  trong class;
+--class tiện ích : dùng trong trường hợp cố định (chưa đáp ứng đúng nhu cầu linh động)
+
+!!ràng buộc khi sử dụng
+    -phương thức static
+        + chỉ có thể gọi phương thức và thuộc tính static
+        +ko thể gọi phương thức và thuộc tính non-static
+        +ko thể sử dụng this hoặc supper
+    -phương thức non-static
+        +có thể gọi phương thức và thuộc tính static
+    -có thể khởi tạo giá trị biến static thông qua khối static
+
+    !!!!!!!!! khi chạy code sẽ tạo bộ nhớ dùng chung và chạy Static trước  rồi đến từ trên xuống!!!!!!!!!!!!!!!
+
+-biến toàn cục
+    +khai báo trong 1 class,bên ngoài constructor ,method và block{}
+-biến cục bộ
+    +khai báo trong 1 constructor ,method và block{}
+-biến static
+    +đc khai báo bằng static
+
+Loại biến	    //Phạm vi	                //Thời gian sống	        //Lưu ý
+Cục bộ	        //Trong hàm/khối lệnh	    //Khi hàm/khối lệnh chạy	//Mất giá trị sau khi thoát
+Toàn cục	    //Toàn chương trình	        //Suốt thời gian chạy	    //Dễ gây side-effect
+Tĩnh cục bộ	    //Trong hàm/khối lệnh	    //Suốt thời gian chạy	    //Giữ giá trị giữa các lần gọi
+Tĩnh toàn cục	//File nguồn khai báo	    //Suốt thời gian chạy	    //Tránh xung đột liên kết
+
+

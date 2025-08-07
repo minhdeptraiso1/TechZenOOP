@@ -1,0 +1,47 @@
+// 7 Minh
+    private static void tuitionStudent() {
+        System.out.println("Bạn muốn tính học phí cho học viên nào?");
+        System.out.println("1. Học viên Backend");
+        System.out.println("2. Học viên Fullstack");
+        System.out.println("3. Tất cả");
+        int choose;
+        do {
+            choose = Integer.parseInt(sc.nextLine());
+            switch (choose) {
+                case 1 ->
+                        System.out.println("Tong hoc phi backend : " + printTotal(totalTuition(StudentBE.class)) + " vnd");
+                case 2 ->
+                        System.out.println("Tong hoc phi Fullend : " + printTotal(totalTuition(StudentFS.class)) + " vnd");
+                case 3 -> System.out.println("Tong tat hoc phi : " + printTotal(totalTuition(Student.class)) + " vnd");
+                default -> System.out.println("Bạn đã nhập sai ! Vui lòng chọn 1 - 2.");
+            }
+        } while (choose < 1 || choose > 3);
+    }
+
+    private static <T extends Student> long totalTuition(Class<T> type) {
+        long sum = 0;
+        for (Person person : persons) {
+            if (type.isInstance(person)) {
+                T student = type.cast(person);
+                sum += student.tuitionFee();
+            }
+        }
+        return sum;
+    }
+
+    private static String printTotal(long n) {
+        String result = String.format("%,d", n);
+        return result;
+
+    }
+-- class student
+    public abstract long tuitionFee();
+-- class studentfs
+public long tuitionFee() {
+        return (long) (this.getSessionNumber() * 50000 * 0.85);
+    }
+-- class studentbe
+
+    public long tuitionFee() {
+        return (long) (this.getSessionNumber() * 50000 * 0.9);
+    }
