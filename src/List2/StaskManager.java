@@ -40,7 +40,8 @@ public class StaskManager<E> {
         }
     }
 
-//Hướng dẫn: Tạo các method addToQueue(), peekQueue(), pollFromQueue(), isQueueEmpty()
+    //Hướng dẫn: Tạo các method addToQueue(), peekQueue(), pollFromQueue(), isQueueEmpty()
+    // Tạo các method pushToStack(), peekStack(), popFromStack(), isStackEmpty()
 
     public void addToQueue(E element) {
         queues.offer(element);
