@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar Notification</title>
+    <style>
+        body {
+            background: #181818;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .navbar {
+            background: #fff;
+            margin-top: 60px;
+            width: 820px;
+            border-radius: 2px 2px 0 0;
+            box-shadow: 0 6px 0 #ededed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px 12px 32px;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .logo {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-style: italic;
+            color: #5e2590;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+        .nav-link {
+            color: #5e2590;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            text-decoration: none;
+            margin-right: 8px;
+            transition: color 0.2s;
+        }
+        .nav-link:last-child {
+            margin-right: 0;
+        }
+        .nav-link:hover {
+            color: #a084ca;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .notification-btn {
+            background: #5e2590;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 6px 18px;
+            font-size: 0.95rem;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .notification-btn:hover {
+            background: #7c3aed;
+        }
+        .avatar {
+            width: 36px;
+            height: 36px;
+            background: #5e2590;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <span class="logo">LOGO</span>
+            <a href="#" class="nav-link">link-one</a>
+            <a href="#" class="nav-link">link-two</a>
+            <a href="#" class="nav-link">link-three</a>
+        </div>
+        <div class="nav-right">
+            <button class="notification-btn">1 new notification</button>
+            <span class="avatar"></span>
+        </div>
+    </nav>

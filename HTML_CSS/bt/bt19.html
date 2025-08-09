@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid News Layout</title>
+    <style>
+        body {
+            margin: 0;
+            background: #22252c;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background: #393f4d;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .header-links {
+            display: flex;
+            gap: 48px;
+            font-size: 1.1rem;
+            font-weight: normal;
+        }
+        .header-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 1.1rem;
+        }
+        .main-layout {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 0;
+            min-height: 80vh;
+        }
+        .sidebar {
+            background: #b71c1c;
+            padding: 16px 0 16px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            border-right: 4px solid #fff;
+        }
+        .sidebar .image-placeholder {
+            background: #fff;
+            color: #222;
+            width: 210px;
+            height: 170px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .sidebar .box {
+            background: #fff;
+            color: #222;
+            width: 210px;
+            height: 110px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        .content-area {
+            padding: 0 0 0 18px;
+        }
+        .tab-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: #b71c1c;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+            border-bottom: 4px solid #fff;
+        }
+        .tab-bar div {
+            padding: 8px 0;
+            border-right: 2px solid #fff;
+        }
+        .tab-bar div:last-child {
+            border-right: none;
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding: 24px 18px 18px 18px;
+        }
+        .article-card {
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 18px 12px;
+            text-align: center;
+        }
+        .article-card h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .article-card p {
+            margin: 0;
+            font-size: 1rem;
+            color: #222;
+        }
+        .footer {
+            background: #393f4d;
+            color: #fff;
+            text-align: center;
+            padding: 12px 0 8px 0;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 1100px) {
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 800px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                flex-direction: row;
+                justify-content: center;
+                border-right: none;
+                border-bottom: 4px solid #fff;
+                gap: 12px;
+                padding: 12px 0;
+            }
+            .sidebar .image-placeholder,
+            .sidebar .box {
+                width: 120px;
+                height: 80px;
+                font-size: 0.9rem;
+            }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span>Header Logo</span>
+        <div class="header-links">
+            <a href="#" class="header-link">header link one</a>
+            <a href="#" class="header-link">header link two</a>
+            <a href="#" class="header-link">header link three</a>
+            <a href="#" class="header-link">header link four</a>
+        </div>
+    </div>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="image-placeholder">placeholder for image</div>
+            <div class="box">Box 1</div>
+            <div class="box">Box 2</div>
+            <div class="box">Box 3</div>
+        </aside>
+        <div class="content-area">
+            <div class="tab-bar">
+                <div>LATEST ARTICLES</div>
+                <div>MOST VIEWS</div>
+                <div>FEATURED</div>
+            </div>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+                <div class="article-card">
+                    <h3>Article Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Copyright © The Odin Project

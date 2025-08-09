@@ -1,0 +1,20 @@
+---quản lý giảng viên
+--thuộc tính class--
+id int         //Int id
+họ tên string
+tuổi int
+môn string
+số giờ doble 
+------
+teacher
+chức năng
+1-thêm giảng viên(nhập từ bàn phím setter/constructor)
+2-hiển thị (getter/override)
+3-tìm getter name() / 
+4- tạo biến static (điếm số giảng viên)
+5-getter if(>  g nhat) / 
+6-getter if(>20/thang)/
+!
+setter xử lý dữ liệu vào
+teachermanager
+1 private static arraylist<teacher> addTeacher (teacher a)

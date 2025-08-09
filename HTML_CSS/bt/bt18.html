@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Grid Layout Example</title>
+    <style>
+        body {
+            background: #181818;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .container {
+            margin: 32px auto;
+            max-width: 98vw;
+            width: 98vw;
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "sidebar nav"
+                "sidebar article"
+                "footer footer";
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: 80px 70px 1fr 80px;
+            gap: 16px;
+            min-height: 95vh;
+        }
+        .header {
+            grid-area: header;
+            background: #206568;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .sidebar {
+            grid-area: sidebar;
+            background: #2367a3;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            border-radius: 12px;
+            padding-top: 24px;
+            flex-direction: column;
+            text-align: center;
+        }
+        .nav {
+            grid-area: nav;
+            background: #8e3be7;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .article {
+            grid-area: article;
+            background: #8e3be7;
+            color: #fff;
+            font-size: 1rem;
+            border-radius: 12px;
+            padding: 16px 18px 12px 18px;
+            font-weight: 500;
+        }
+        .article h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+        .footer {
+            grid-area: footer;
+            background: #3a4151;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        @media (max-width: 900px) {
+            .container {
+                grid-template-areas:
+                    "header"
+                    "nav"
+                    "sidebar"
+                    "article"
+                    "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: 70px 60px 120px 1fr 70px;
+            }
+            .sidebar {
+                font-size: 1.3rem;
+                padding-top: 10px;
+            }
+            .header, .footer, .nav, .article {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+        <div class="sidebar">Sidebar</div>
+        <div class="nav">Nav</div>
+        <div class="article">
+            <h2>Article</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur bibendum turpis quis interdum semper. Sed at pharetra neque, nec lacinia diam. Suspendisse quis faucibus mi, aliquam porttitor ipsum. Vivamus condimentum eros id mattis pharetra. Duis varius eros nibh. Donec a venenatis eros. Fusce in mauris massa. Donec est metus, rhoncus eu leo sed, aliquet posuere nisl.</p>
+            <p>Cras ut ex in nibh accumsan ullamcorper. Fusce rutrum, metus id porta porttitor, leo ipsum congue velit, eu hendrerit lectus nisi a odio. Pellentesque tristique eros id nibh finibus euismod. Cras suscipit volutpat elit eget pulvinar. Vivamus at blandit leo. Aenean sodales ex non massa efficitur, et egestas neque dapibus. In consequat hendrerit ex, nec finibus magna faucibus eu. Aliquam a libero non erat sollicitudin condimentum. In ac fringilla nisi. Sed pharetra ut turpis id luctus. Proin posuere tortor ac tempus luctus. Donec vitae est et neque faucibus posuere. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        </div>
+        <div class="footer">Footer</div>
+    </div>
+</body>

@@ -1,0 +1,10 @@
+-----------------------------------------------------------------phím---------------------------------------------------------------
+trl + alt + l == fomat canh chỉnh đẹp code 
+dùng refacter để đổi tên biến hàng loạt
+dùng Generate để khởi tạo các phương thức trong OOP
+
+---------------------------------------------------------hàm liên quan code---------------------------------------------------------
+Bigdecimal : dùng biến chứa số trong hàm liên quan đến độ chính xác tuyệt đối
+public static arrayList<?> getName(Strinh name)//? sẽ thay thế cho bất cứ kiểu dữ liệu nào đã khai báo class/stirng/Interger...
+---------------------------------------------------------User flow------------------------------------------------------------------
+https://www.figma.com/design/s1jTN4RYu5wAQ18LZZkvVn/User-flow?node-id=0-1&p=f&t=1bLr13KfozFU7jdX-0

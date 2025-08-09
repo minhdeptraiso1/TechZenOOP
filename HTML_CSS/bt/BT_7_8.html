@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    .header, .footer {
+        
+        padding: 20px;
+        text-align: center;
+        background-color: red;
+    }
+    .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "left topright topright"
+        "left botright botright";
+    flex-grow: 1;
+}
+.section {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+
+    background-color: lightblue;
+}
+.section1 {
+    grid-area: topright;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: lightgreen;
+}
+.section2 {
+    grid-area: botright;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: rgb(8, 110, 8);
+}
+</style>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Header Title</h1>
+        </div>
+        <div class="content">
+           <div class="section">
+                <h2>left Title</h2>
+                
+            </div>
+            <div class="section1">
+                <h2> top right Title</h2>
+
+            </div>
+            <div class="section2">
+                <h2>bot right Title</h2>
+
+            </div>
+        </div>
+        <div class="footer">
+            <p>Bottom Content</p>
+    </div>
+    
+   
+</body>
+</html>

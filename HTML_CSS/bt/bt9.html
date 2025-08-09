@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khảo Sát Ý Kiến</title>
+    <style>
+        body {
+            background: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #f3f3f3;
+            padding: 40px 0;
+        }
+        .survey-box {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            padding: 32px 32px 24px 32px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .survey-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 28px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .options {
+            margin-bottom: 8px;
+        }
+        .options label {
+            font-weight: normal;
+            display: inline-block;
+            margin-right: 18px;
+        }
+        select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-top: 4px;
+            margin-bottom: 2px;
+            box-sizing: border-box;
+        }
+        .btn-submit {
+            width: 100%;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover {
+            background: #219150;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="survey-title">Khảo Sát Ý Kiến</div>
+        <form class="survey-box">
+            <div class="form-group">
+                <label>Bạn thích ăn gì nhất?</label>
+                <div class="options">
+                    <label><input type="radio" name="food" value="pho" required> Phở</label>
+                    <label><input type="radio" name="food" value="bun"> Bún</label>
+                    <label><input type="radio" name="food" value="com"> Cơm</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Đồ uống bạn yêu thích:</label>
+                <div class="options">
+                    <label><input type="checkbox" name="drink" value="caphe"> Cà phê</label>
+                    <label><input type="checkbox" name="drink" value="tra"> Trà</label>
+                    <label><input type="checkbox" name="drink" value="nuocep"> Nước ép</label>
+                    <label><input type="checkbox" name="drink" value="sua"> Sữa</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="location">Bạn sống ở khu vực nào?</label>
+                <select id="location" name="location" required>
+                    <option value="">-- Chọn khu vực --</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="hcm">TP. Hồ Chí Minh</option>
+                    <option value="danang">Đà Nẵng</option>
+                    <option value="other">Khác</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Gửi khảo sát</button>
+        </form> 
+    </div>
+</body>

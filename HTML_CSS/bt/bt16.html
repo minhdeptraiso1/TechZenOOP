@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Odin Project Style Landing</title>
+    <style>
+        body {
+            margin: 0;
+            background: #fff;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 16px 24px 0 24px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 16px;
+        }
+        .nav-link {
+            color: #888;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #b8860b;
+        }
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+        .odin-logo {
+            width: 120px;
+            margin-bottom: 18px;
+        }
+        .odin-title {
+            font-family: 'Cinzel Decorative', 'Arial', serif;
+            font-size: 2.8rem;
+            color: #c89b3c;
+            letter-spacing: 4px;
+            margin-bottom: 32px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .search-bar {
+            width: 400px;
+            max-width: 90vw;
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: 1.5px solid #eee;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            outline: none;
+            box-sizing: border-box;
+            background: #fff;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+        .odin-logo img {
+            width: 100%;
+            height: auto;
+           display: inline;
+           /*  border-radius: 50%;*/
+        }
+        .odin-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 20px;
+            background-color: #b8860b;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .odin-btn:hover {
+            background-color: #a50a0a;
+            transform: scale(2.05);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Store</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-link">Profile</a>
+            <a href="#" class="nav-link">Settings</a>
+        </div>
+    </nav>
+    <div class="center-content">
+       
+        <div class="odin-logo">
+           <img src="4-pet.png" alt="Odin Logo">
+        </div>
+        <div class="odin-title">THE ODIN PROJECT</div>
+        <input class="search-bar" type="text" placeholder="">
+        <div class="btn-group">
+            <button class="odin-btn">Do the thing!</button>
+            <button class="odin-btn">Do the other thing!</button>
+        </div>
+    </div>

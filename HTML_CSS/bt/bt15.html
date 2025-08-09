@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal Confirm Example</title>
+    <style>
+        body {
+            background: #b3b3b3;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .modal {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+            padding: 32px 32px 24px 32px;
+            width: 540px;
+            display: flex;
+            gap: 18px;
+            position: relative;
+        }
+        .modal-icon {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            background: #e3e9fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #4a6ee0;
+            margin-top: 6px;
+        }
+        .modal-content {
+            flex: 1;
+        }
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+        }
+        .modal-desc {
+            font-size: 1.08rem;
+            margin-bottom: 18px;
+            color: #222;
+        }
+        .modal-actions {
+            margin-top: 8px;
+        }
+        .btn {
+            font-size: 1rem;
+            padding: 8px 24px;
+            border-radius: 7px;
+            border: none;
+            cursor: pointer;
+            margin-right: 8px;
+            font-family: inherit;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-primary {
+            background: #3867e3;
+            color: #fff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #274bb5;
+        }
+        .btn-outline {
+            background: #fff;
+            color: #3867e3;
+            border: 1.5px solid #d1d5db;
+        }
+        .btn-outline:hover {
+            background: #f3f6fa;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-close:hover {
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-icon">!</div>
+        <div class="modal-content">
+            <div class="modal-title">Are you sure you want to do that?</div>
+            <div class="modal-desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Pariatur excepturi id soluta, numquam minima rerum doloremque eveniet aspernatur beatae commodi.
+                Cupiditate recusandae ad repellendus quidem consectetur sequi amet aspernatur cumque!
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary">Continue</button>
+                <button class="btn btn-outline">Cancel</button>
+            </div>
+        </div>
+        <button class="modal-close">&times;</button>
+    </div>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Example</title>
+    <style>
+        body {
+            background: #f3f3f3;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            border: 6px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            width: 600px;
+            padding: 0;
+        }
+        .card-section {
+            background: #e6f3fc;
+            margin: 0 0 12px 0;
+            padding: 18px 24px;
+            font-size: 1.4rem;
+        }
+        .card-section:last-child {
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .card-title {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .card-content {
+            font-size: 1.25rem;
+            margin: 0;
+        }
+        .card-footer {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .big-btn {
+            display: block;
+            margin: 16px auto 0 auto;
+            padding: 12px 40px;
+            font-size: 1.2rem;
+            background: #fff;
+            border: none;
+            border-radius: 3px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-section">
+            <div class="card-title">I'm a card</div>
+        </div>
+        <div class="card-section">
+            <div class="card-content">
+                I have content inside me..lorem ipsum blah blah blah. <br>
+                Here's some stuff you need to read.
+            </div>
+        </div>
+        <div class="card-section card-footer">
+            and a <br>
+            <button class="big-btn">BIG BUTTON</button>
+        </div>
+    </div>
+</body>

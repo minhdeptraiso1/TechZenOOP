@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu with Logo Center</title>
+    <style>
+        body {
+            background: #181818;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .navbar {
+            background: #f7e7c3;
+            padding: 18px 24px;
+            border: 6px solid #fff;
+            width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-group {
+            display: flex;
+            gap: 16px;
+        }
+        .nav-link {
+            background: #fff3e0;
+            color: #3b3bb3;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            border: 2px solid #e0d2b3;
+            border-radius: 3px;
+            padding: 6px 16px;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: background 0.2s;
+        }
+        .nav-link:hover {
+            background: #f7e7c3;
+        }
+        .logo {
+            background: #fff;
+            color: #e76f51;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 2rem;
+            padding: 6px 32px;
+            border-radius: 3px;
+            border: none;
+            margin: 0 24px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-group">
+            <a href="#" class="nav-link">ONE</a>
+            <a href="#" class="nav-link">TWO</a>
+            <a href="#" class="nav-link">THREE</a>
+        </div>
+        <div class="logo">LOGO</div>
+        <div class="nav-group">
+            <a href="#" class="nav-link">FOUR</a>
+            <a href="#" class="nav-link">FIVE</a>
+            <a href="#" class="nav-link">SIX</a>
+        </div>
+    </nav>

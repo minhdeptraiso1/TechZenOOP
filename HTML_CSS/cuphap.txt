@@ -1,0 +1,20 @@
+na>ul>li*3>a.chapter{chapter $ of 3} gọi gộp
+
+alt + dòng + lên/xuống để di chuyển dòng
+
+details>
+	summary> tên hiển thị<
+	p>nội dung che giấu<
+<
+chỉnh sửa ko cần input
+div contenteditable = true>
+nd
+<
+
+khi di chuột vào hiện ra
+p title"noidung">who<
+ko cho dịc
+p translate=no > Marth<
+
+w3 school : web html/css...
+ctrl l k a de format code
