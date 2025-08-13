@@ -1,5 +1,9 @@
 package BT_1_8.chieu;
 
+import BT_1_8.chieu.exception.InvalidAgeException;
+import BT_1_8.chieu.exception.InvalidEmailException;
+import BT_1_8.chieu.exception.NullOrEmptyException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,6 +14,7 @@ public class Main {
     static ArrayList<Person> persons = new ArrayList<>();
     static ArrayList<Course> courses = new ArrayList<>();
     static LinkedList<Schedule> schedules = new LinkedList<>();
+    static HashMap<Schedule, Lecturer> manage = new HashMap<>();
 
 // Thay thế method initializeSampleData() trong Main.java bằng code này
 
@@ -182,81 +187,6 @@ public class Main {
                 .orElse(null);
     }
 
-// ==================== DỮ LIỆU TEST CHO TỪNG CHỨC NĂNG ====================
-
-/*
-🧪 HƯỚNG DẪN TEST CÁC CHỨC NĂNG:
-
-1. THÊM THÀNH VIÊN (1):
-   - Test validation với dữ liệu sai: tên có số, email sai format, tuổi âm
-
-2. HIỂN THỊ DANH SÁCH (2):
-   - Có đầy đủ dữ liệu để test tất cả loại thành viên
-
-3. TÌM KIẾM (3):
-   - Test theo tên: "Nguyễn Minh Anh" (sẽ ra 2 kết quả - test trùng tên)
-   - Test theo email: "nva@techzen.edu.vn"
-   - Test không tìm thấy: "Không tồn tại"
-
-4. CẬP NHẬT THÔNG TIN (4):
-   - Test với ID: "HVBE-00BE001", "GV-00L001"
-
-5. XÓA THÀNH VIÊN (5):
-   - Test xóa lecturer có trợ giảng: "GV-00L001"
-   - Test xóa student: "HVBE-00BE010"
-
-6. SẮP XẾP THEO ĐIỂM (6):
-   - Backend: từ 5.5 → 9.1 điểm
-   - Fullstack: từ 5.9 → 9.0 điểm
-
-7. TÍNH HỌC PHÍ (7):
-   - Backend: 10 học viên với số buổi khác nhau
-   - Fullstack: 10 học viên với số buổi khác nhau
-
-8. TÍNH LƯƠNG (8):
-   - Lecturer: 5 giảng viên với giờ dạy khác nhau
-   - TA: 4 trợ giảng với giờ dạy khác nhau
-
-9. TÌM TRỢ GIẢNG CUA GV (9):
-   - Test: "GV-00L001" → có 2 trợ giảng
-   - Test: "GV-00L002" → có 2 trợ giảng
-   - Test: "GV-00L005" → có 1 trợ giảng
-
-10. TẠO LỚP HỌC (10):
-    - Đã có 5 lớp mẫu
-
-11. THÊM HV VÀO LỚP (11):
-    - Còn 2 BE students và 2 FS students chưa có lớp
-
-12. HV ĐIỂM CAO NHẤT (12):
-    - Lớp C-001: Lê Thị Cẩm (9.1 điểm)
-    - Lớp C-003: Chu Thị Xuân (9.0 điểm)
-
-13. THÊM BUỔI GIẢNG (13):
-    - Đã có 10 buổi mẫu
-
-14. XÓA BUỔI GIẢNG (14):
-    - Test xóa: 13/08/2025 (có 2 buổi trùng)
-    - Test xóa: 15/08/2025 (có 2 buổi trùng)
-
-15. HIỂN THỊ LỊCH (15):
-    - Có 10 buổi giảng từ 8/2025 → 9/2025
-
-16. KIỂM TRA HV TRÙNG TÊN (16):
-    - Lớp C-001: có "Nguyễn Minh Anh" trùng tên
-
-17. KIỂM TRA LỊCH TRÙNG (17):
-    - Có trùng ngày: 13/08/2025 và 15/08/2025
-
-18. TRA CỨU LỚP (18):
-    - Test: "C-001", "c-003" (test case insensitive)
-    - Test không tìm thấy: "C-999"
-
-19. QUẢN LÝ LỊCH GIẢNG (19):
-    - Test thêm lịch mới với lecturer
-    - Test tìm theo ngày: 13/08/2025
-*/
-
 
     private static void mainMenu() {
 
@@ -296,7 +226,7 @@ public class Main {
         System.out.println("5. Thoát...");
     }
 
-    private static void processAdd() {
+    private static void processAdd() throws NullOrEmptyException {
         int choice;
 
         while (true) {
@@ -344,7 +274,7 @@ public class Main {
         return true;
     }
 
-    private static <T extends Person> void addNewPerson(T person) {
+    private static <T extends Person> void addNewPerson(T person) throws NullOrEmptyException {
         do {
             person.setId(getRandomIdentify());
         } while (!checkIdentify(person.getId()));
@@ -489,7 +419,7 @@ public class Main {
     }
 
     // 4 Như
-    private static void menuUpdate() {
+    private static void menuUpdate() throws NullOrEmptyException {
         System.out.println("===== Màn Hình 2 =====");
         System.out.print("Nhập vào ID muốn cập nhật thông tin: ");
         String id = sc.nextLine().trim();
@@ -517,7 +447,11 @@ public class Main {
                         System.out.print("Nhập tuổi mới: ");
                         try {
                             int newAge = Integer.parseInt(sc.nextLine().trim());
-                            person.setAge(newAge);
+                            try {
+                                person.setAge(newAge);
+                            } catch (InvalidAgeException e) {
+                                throw new RuntimeException(e);
+                            }
                             System.out.println("Đã cập nhật tuổi thành công!");
                         } catch (NumberFormatException e) {
                             System.out.println("Tuổi không hợp lệ!");
@@ -526,7 +460,11 @@ public class Main {
                     case 3:
                         System.out.print("Nhập email mới: ");
                         String newEmail = sc.nextLine().trim();
-                        person.setEmail(newEmail);
+                        try {
+                            person.setEmail(newEmail);
+                        } catch (InvalidEmailException e) {
+                            throw new RuntimeException(e);
+                        }
                         System.out.println("Đã cập nhật email thành công!");
                         break;
                     default:
@@ -677,8 +615,8 @@ public class Main {
         } while (choose < 1 || choose > 3);
     }
 
-    private static <T extends Student> double totalTuition(Class<T> type) {
-        double sum = 0;
+    private static <T extends Student> long totalTuition(Class<T> type) {
+        long sum = 0;
         for (Person person : persons) {
             if (type.isInstance(person)) {
                 T student = type.cast(person);
@@ -694,26 +632,39 @@ public class Main {
         System.out.println("1. Giảng viên");
         System.out.println("2. Trợ giảng");
         System.out.print("Mời bạn nhập: ");
-        int choice = sc.nextInt();
 
-        if (choice == 1) {
-            double totalSalaryLecturer = 0;
-            for (Person p : persons) {
-                if (p instanceof Lecturer lecturer) {
-                    totalSalaryLecturer += lecturer.getSalary();
+        try {
+            int choice = Integer.parseInt(sc.nextLine());
+
+            if (choice == 1) {
+                double totalSalaryLecturer = 0;
+                int count = 0;
+                for (Person p : persons) {
+                    if (p instanceof Lecturer lecturer) {
+                        totalSalaryLecturer += lecturer.getSalary();
+                        count++;
+                    }
                 }
-            }
-            System.out.println("=> Tổng lương của các giảng viên: " + totalSalaryLecturer);
-        } else if (choice == 2) {
-            double totalSalaryTA = 0;
-            for (Person p : persons) {
-                if (p instanceof TeachingAssistant ta) {
-                    totalSalaryTA += ta.getSalary();
+                System.out.println("=> Số giảng viên: " + count);
+                System.out.println("=> Tổng lương các giảng viên: " + String.format("%,.0f", totalSalaryLecturer) + " VND");
+
+            } else if (choice == 2) {
+                double totalSalaryTA = 0;
+                int count = 0;
+                for (Person p : persons) {
+                    if (p instanceof TeachingAssistant ta) {
+                        totalSalaryTA += ta.getSalary();
+                        count++;
+                    }
                 }
+                System.out.println("=> Số trợ giảng: " + count);
+                System.out.println("=> Tổng lương các trợ giảng: " + String.format("%,.0f", totalSalaryTA) + " VND");
+
+            } else {
+                System.out.println("Lựa chọn không hợp lệ! Chỉ chọn 1 hoặc 2.");
             }
-            System.out.println("=> Tổng lương của các trợ giảng: " + totalSalaryTA);
-        } else {
-            System.out.println("Lựa chọn không hợp lệ! Chỉ chọn 1 hoặc 2.");
+        } catch (NumberFormatException e) {
+            System.out.println("Vui lòng nhập số nguyên!");
         }
     }
 
@@ -904,9 +855,17 @@ public class Main {
     // 13. Thêm buổi giảng dạy - Thủy
     private static void addSchedule() {
         Schedule newSchedule = new Schedule();
-        System.out.println("=== Thêm buổi giảng mới ===");
         newSchedule.input();
-        schedules.add(newSchedule);
+        System.out.print("Nhập ID giảng viên phụ trách: ");
+        String lecturerId = sc.nextLine();
+        Lecturer assignedLecturer = findLecturerById(lecturerId);
+        if (assignedLecturer != null) {
+            manage.put(newSchedule, assignedLecturer);
+            System.out.println("Thêm lịch giảng thành công!");
+        } else {
+            System.out.println("Không tìm thấy giảng viên với ID này.");
+        }
+
     }
 
     //14. Xóa lịch dạy - Minh
@@ -959,21 +918,22 @@ public class Main {
 
     //15. Hiển thị lịch dạy - Minh
     private static void displaySchedule() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        if (schedules.isEmpty()) {
-            System.out.println("Danh sách buổi giảng trống.");
-            return;
-        }
-        int count = 0;
-        for (Schedule s : schedules) {
-            System.out.println("Lịch học thứ: " + (++count));
+        if (manage.isEmpty()) {
+            System.out.println("Chưa có lịch giảng nào.");
+        } else {
+            System.out.println("\n=== DANH SÁCH LỊCH GIẢNG ===");
+            int count = 1;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            for (Map.Entry<Schedule, Lecturer> entry : manage.entrySet()) {
+                Schedule schedule = entry.getKey();
+                Lecturer lecturer = entry.getValue();
 
-            String dayFormatted = (s.getDay() != null) ? s.getDay().format(formatter) : "Chưa có ngày";
-            String content = (s.getContent() != null && !s.getContent().isEmpty()) ? s.getContent() : "Chưa có nội dung";
-
-            System.out.println("Ngày: " + dayFormatted);
-            System.out.println("Nội dung: " + content);
-            System.out.println("---------------------------\n");
+                System.out.println("Lịch thứ " + count++ + ":");
+                System.out.println("  Ngày: " + schedule.getDay().format(formatter));
+                System.out.println("  Nội dung: " + schedule.getContent());
+                System.out.println("  Giảng viên: " + lecturer.getFullName() + " (" + lecturer.getId() + ")");
+                System.out.println("-------------------");
+            }
         }
     }
 
@@ -1028,30 +988,22 @@ public class Main {
 
     //18
     private static void lookUpClass() {
-        HashMap<String, ArrayList<Student>> courseMap = new HashMap<>();
+        HashMap<String, Course> courseMap = new HashMap<>();
         for (Course c : courses) {
-            ArrayList<Student> students = c.getStudents();
-            if (students == null) {
-                students = new ArrayList<>();
-            }
-            courseMap.put(c.getId(), students);
+            courseMap.put(c.getId().toLowerCase(), c); // Lưu key là lowercase
         }
 
-        System.out.println("Nhập mã lớp:");
-        String searchId = sc.nextLine().trim();
+        System.out.print("Nhập mã lớp: ");
+        String searchId = sc.nextLine().trim().toLowerCase(); // Convert input to lowercase
 
-        if (courseMap.containsKey(searchId)) {
-            ArrayList<Student> found = courseMap.get(searchId);
-            System.out.println("Tìm thấy lớp với mã: " + searchId);
-            System.out.println("Danh sách sinh viên:");
-            for (Student s : found) {
-                if (s != null) {
-                    System.out.println(" - " + s);
-                }
-            }
+        Course foundCourse = courseMap.get(searchId);
+        if (foundCourse != null) {
+            System.out.println("Tìm thấy lớp:");
+            System.out.println(foundCourse);
         } else {
-            System.out.println("Không tìm thấy lớp có mã: " + searchId);
+            System.out.println("Không tìm thấy lớp có mã: " + searchId.toUpperCase());
         }
+
 
 //        System.out.println("\nDanh sách tất cả các lớp:");
 //        for (Map.Entry<String, ArrayList<Student>> entry : courseMap.entrySet()) {
@@ -1069,11 +1021,13 @@ public class Main {
 
     //19
     private static void manageTeachingSchedule() {
-        HashMap<Schedule, Lecturer> manage = new HashMap<>();
+
+
         while (true) {
+            System.out.println("\n=== QUẢN LÝ LỊCH GIẢNG DẠY ===");
             System.out.println("1. Thêm lịch giảng mới");
             System.out.println("2. Hiển thị toàn bộ lịch và giảng viên");
-            System.out.println("3. Tìm giảng viên theo lịch");
+            System.out.println("3. Tìm lịch dạy của giảng viên");
             System.out.println("4. Thoát");
             System.out.print("Chọn chức năng: ");
 
@@ -1081,67 +1035,80 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    Schedule newSchedule = new Schedule();
-                    newSchedule.input();
-                    System.out.print("Nhập ID giảng viên phụ trách: ");
-                    String lecturerId = sc.nextLine();
-                    Lecturer assignedLecturer = findLecturerById(lecturerId);
-                    if (assignedLecturer != null) {
-                        manage.put(newSchedule, assignedLecturer);
-                        System.out.println("Thêm lịch giảng thành công!");
-                    } else {
-                        System.out.println("Không tìm thấy giảng viên với ID này.");
-                    }
+                    addSchedule();
                     break;
                 case 2:
-                    if (manage.isEmpty()) {
-                        System.out.println("Chưa có lịch giảng nào.");
-                    } else {
-                        for (Map.Entry<Schedule, Lecturer> entry : manage.entrySet()) {
-                            System.out.println("Lịch: " + entry.getKey());
-                            System.out.println("Giảng viên: " + entry.getValue());
-                            System.out.println("-------------------");
-                        }
-                    }
+                    displaySchedule();
                     break;
                 case 3:
-                    System.out.print("Nhập ngày dạy cần tìm (dd/MM/yyyy): ");
-                    String inputDate = sc.nextLine().trim();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate date;
+                    ArrayList<Lecturer> lecturers = getList(Lecturer.class);
 
-                    try {
-                        date = LocalDate.parse(inputDate, formatter);
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Ngày nhập không hợp lệ!");
-                        return;
+                    if (lecturers.isEmpty()) {
+                        System.out.println("Hiện tại chưa có giảng viên nào!");
+                        break;
                     }
 
-                    boolean found = false;
-                    for (Map.Entry<Schedule, Lecturer> entry : manage.entrySet()) {
-                        Schedule schedule = entry.getKey();
+                    // Hiển thị danh sách giảng viên để chọn
+                    System.out.println("===== DANH SÁCH GIẢNG VIÊN =====");
+                    for (int i = 0; i < lecturers.size(); i++) {
+                        Lecturer lecturer = lecturers.get(i);
+                        System.out.println((i + 1) + ". " + lecturer.getId() + " - " + lecturer.getFullName() + " (" + lecturer.getSubject() + ")");
+                    }
 
-                        if (schedule.getDay() != null && schedule.getDay().equals(date)) {
-                            Lecturer lecturer = entry.getValue();
-                            System.out.println("Lịch dạy ngày " + date.format(formatter) + " do giảng viên: " + lecturer.getFullName() + " phụ trách.");
-                            found = true;
+                    // Cho user chọn giảng viên
+                    Lecturer selectedLecturer = null;
+                    while (true) {
+                        try {
+                            System.out.print("Chọn giảng viên: ");
+                            int choiceLecturer = Integer.parseInt(sc.nextLine());
+
+                            if (choiceLecturer < 1 || choiceLecturer > lecturers.size()) {
+                                System.out.println("Lựa chọn không hợp lệ!");
+                                continue;
+                            }
+
+                            selectedLecturer = lecturers.get(choiceLecturer - 1);
                             break;
+                        } catch (NumberFormatException e) {
+                            System.out.println("Vui lòng nhập một số nguyên!");
                         }
                     }
 
-                    if (!found) {
-                        System.out.println("Không tìm thấy lịch dạy nào vào ngày " + inputDate);
+                    // Tìm và hiển thị tất cả lịch dạy của giảng viên được chọn
+                    System.out.println("\n=== LỊCH DẠY CỦA GIẢNG VIÊN: " + selectedLecturer.getFullName() + " ===");
+
+                    boolean foundSchedule = false;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    int scheduleCount = 1;
+
+                    for (Map.Entry<Schedule, Lecturer> entry : manage.entrySet()) {
+                        Lecturer lecturer = entry.getValue();
+
+                        if (lecturer.getId().equals(selectedLecturer.getId())) {
+                            Schedule schedule = entry.getKey();
+                            System.out.println("Buổi dạy thứ " + scheduleCount++ + ":");
+                            System.out.println("  Ngày: " + schedule.getDay().format(formatter));
+                            System.out.println("  Nội dung: " + schedule.getContent());
+                            System.out.println("  Giảng viên: " + lecturer.getFullName() + " - " + lecturer.getSubject());
+                            System.out.println("-------------------");
+                            foundSchedule = true;
+                        }
                     }
+
+                    if (!foundSchedule) {
+                        System.out.println("Giảng viên " + selectedLecturer.getFullName() + " chưa có lịch dạy nào.");
+                    }
+                    break;
 
                 case 4:
                     System.out.println("Thoát chương trình quản lý lịch giảng.");
                     return;
+
                 default:
                     System.out.println("Lựa chọn không hợp lệ!");
             }
         }
     }
-
 
     private static Lecturer findLecturerById(String id) {
         for (Person p : persons) {
@@ -1162,7 +1129,7 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NullOrEmptyException {
         initializeSampleData();
         int choice;
         while (true) {

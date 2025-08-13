@@ -1,10 +1,12 @@
 package BT_1_8.chieu;
 
-import java.util.ArrayList;
+import BT_1_8.chieu.exception.NullOrEmptyException;
+
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class TeachingAssistant extends Teacher {
-    private final ArrayList<Lecturer> lecturers = new ArrayList<>();
+    private final HashSet<Lecturer> lecturers = new HashSet<>();
     private int practiceSessions;
 
     public TeachingAssistant() {
@@ -23,7 +25,7 @@ public class TeachingAssistant extends Teacher {
         this.practiceSessions = practiceSessions;
     }
 
-    public ArrayList<Lecturer> getLecturers() {
+    public HashSet<Lecturer> getLecturers() {
         return lecturers;
     }
 
@@ -36,12 +38,12 @@ public class TeachingAssistant extends Teacher {
     }
 
     @Override
-    public void setId(String id) {
+    public void setId(String id) throws NullOrEmptyException {
         super.setId("TG-00" + id);
     }
 
     @Override
-    public void input() {
+    public void input() throws NullOrEmptyException {
         Scanner sc = new Scanner(System.in);
 
         super.input();

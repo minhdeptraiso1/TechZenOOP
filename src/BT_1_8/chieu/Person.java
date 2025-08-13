@@ -1,5 +1,10 @@
 package BT_1_8.chieu;
 
+import BT_1_8.chieu.exception.InvalidAgeException;
+import BT_1_8.chieu.exception.InvalidEmailException;
+import BT_1_8.chieu.exception.NullOrEmptyException;
+
+import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class Person {
@@ -18,42 +23,83 @@ public abstract class Person {
         this.email = email;
     }
 
-    public void input() {
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Person person)) return false;
+        return Objects.equals(id, person.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    public void input() throws NullOrEmptyException {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.print("Nhập tên: ");
-            this.fullName = sc.nextLine().trim();
-            if (this.fullName.matches("[a-zA-ZÀ-Ỹà-ỹ\\s]+")) {
-                break;
-            } else {
-                System.out.println("Tên không hợp lệ! Không chứa số hoặc ký tự đặc biệt.\n");
-            }
-        }
-
-        while (true) {
-            System.out.print("Nhập tuổi: ");
-            if (sc.hasNextInt()) {
-                this.age = sc.nextInt();
-                if (this.age < 0) {
-                    System.out.println("Tuổi không hợp lệ! Phải >= 0.\n");
-                    continue;
+            try {
+                System.out.print("Nhập ID: ");
+                this.id = sc.nextLine().trim();
+                if (this.id.isEmpty()) {
+                    throw new NullOrEmptyException("ID không được để trống");
                 }
-                sc.nextLine();
                 break;
-            } else {
-                System.out.println("Tuổi không hợp lệ! Nhập số nguyên.\n");
-                sc.nextLine();
+            } catch (NullOrEmptyException e) {
+                System.out.println("Lỗi: " + e.getMessage() + "\n");
             }
         }
 
+        // --- Nhập tên ---
         while (true) {
-            System.out.print("Nhập email: ");
-            this.email = sc.nextLine().trim();
-            if (this.email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$")) {
+            try {
+                System.out.print("Nhập tên: ");
+                this.fullName = sc.nextLine().trim();
+                if (this.fullName.isEmpty()) {
+                    throw new NullOrEmptyException("Tên không được để trống");
+                }
+                if (!this.fullName.matches("[a-zA-ZÀ-Ỹà-ỹ\\s]+")) {
+                    throw new Exception("Tên không hợp lệ! Không chứa số hoặc ký tự đặc biệt.");
+                }
                 break;
-            } else {
-                System.out.println("Email không hợp lệ! Vui lòng nhập đúng định dạng (vd: ten@gmail.com).\n");
+            } catch (NullOrEmptyException e) {
+                System.out.println("Lỗi: " + e.getMessage() + "\n");
+            } catch (Exception e) {
+                System.out.println("Lỗi: " + e.getMessage() + "\n");
+            }
+        }
+        while (true) {
+            try {
+                System.out.print("Nhập tuổi: ");
+                String ageInput = sc.nextLine().trim();
+                if (ageInput.isEmpty()) {
+                    throw new NullOrEmptyException("Tuổi không được để trống");
+                }
+                int inputAge = Integer.parseInt(ageInput);
+                this.setAge(inputAge);
+                break;
+            } catch (NullOrEmptyException e) {
+                System.out.println("Lỗi: " + e.getMessage() + "\n");
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi: Tuổi không hợp lệ! Vui lòng nhập số nguyên.\n");
+            } catch (InvalidAgeException e) {
+                System.out.println("Lỗi: Tuổi không hợp lệ! " + e.getMessage() + ". Tuổi hợp lệ từ 17 đến 100.\n");
+            }
+        }
+        while (true) {
+            try {
+                System.out.print("Nhập email: ");
+                String inputEmail = sc.nextLine().trim();
+                if (inputEmail.isEmpty()) {
+                    throw new NullOrEmptyException("Email không được để trống");
+                }
+                this.setEmail(inputEmail);
+                break;
+            } catch (NullOrEmptyException e) {
+                System.out.println("Lỗi: " + e.getMessage() + "\n");
+            } catch (InvalidEmailException e) {
+                System.out.println("Cảnh báo! " + e.getMessage());
+                System.out.println("Vui lòng nhập đúng định dạng (vd: ten@gmail.com).\n");
             }
         }
     }
@@ -62,7 +108,10 @@ public abstract class Person {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(String id) throws NullOrEmptyException {
+        if (id == null || id.trim().isEmpty()) {
+            throw new NullOrEmptyException("ID không được để trống");
+        }
         this.id = id;
     }
 
@@ -70,7 +119,10 @@ public abstract class Person {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
+    public void setFullName(String fullName) throws NullOrEmptyException {
+        if (fullName == null || fullName.trim().isEmpty()) {
+            throw new NullOrEmptyException("Tên không được để trống");
+        }
         this.fullName = fullName;
     }
 
@@ -78,7 +130,10 @@ public abstract class Person {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age) throws InvalidAgeException {
+        if (age < 17 || age > 100) {
+            throw new InvalidAgeException("Tuổi không hợp lệ: " + age);
+        }
         this.age = age;
     }
 
@@ -86,7 +141,13 @@ public abstract class Person {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws InvalidEmailException, NullOrEmptyException {
+        if (email == null || email.trim().isEmpty()) {
+            throw new NullOrEmptyException("Email không được để trống");
+        }
+        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$")) {
+            throw new InvalidEmailException("Email không đúng định dạng: " + email);
+        }
         this.email = email;
     }
 

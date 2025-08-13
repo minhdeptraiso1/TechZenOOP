@@ -1,9 +1,13 @@
 package BT_1_8.chieu;
 
+import BT_1_8.chieu.exception.NullOrEmptyException;
+
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Lecturer extends Teacher {
     private String subject;
+    private HashSet<Schedule> scheduleLecturer = new HashSet<>();
 
     public Lecturer() {
     }
@@ -21,13 +25,22 @@ public class Lecturer extends Teacher {
         this.subject = subject;
     }
 
+    public HashSet<Schedule> getScheduleLecturer() {
+        
+        return scheduleLecturer;
+    }
+
+    public void setScheduleLecturer(HashSet<Schedule> scheduleLecturer) {
+        this.scheduleLecturer = scheduleLecturer;
+    }
+
     @Override
-    public void setId(String id) {
+    public void setId(String id) throws NullOrEmptyException {
         super.setId("GV-00" + id);
     }
 
     @Override
-    public void input() {
+    public void input() throws NullOrEmptyException {
         Scanner sc = new Scanner(System.in);
 
         super.input();

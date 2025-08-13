@@ -1,5 +1,7 @@
 package BT_1_8.chieu;
 
+import BT_1_8.chieu.exception.NullOrEmptyException;
+
 import java.util.Scanner;
 
 public class StudentBE extends Student {
@@ -22,12 +24,12 @@ public class StudentBE extends Student {
     }
 
     @Override
-    public void setId(String id) {
+    public void setId(String id) throws NullOrEmptyException {
         super.setId("HVBE-00" + id);
     }
 
     @Override
-    public void input() {
+    public void input() throws NullOrEmptyException {
         Scanner sc = new Scanner(System.in);
 
         super.input();
@@ -55,8 +57,8 @@ public class StudentBE extends Student {
     }
 
     @Override
-    public double tuitionFee() {
-        return this.getSessionNumber() * 50000 * 0.9;
+    public long tuitionFee() {
+        return (long) (this.getSessionNumber() * 50000 * 0.9);
     }
 
     @Override

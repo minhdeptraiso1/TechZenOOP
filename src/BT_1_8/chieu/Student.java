@@ -1,5 +1,7 @@
 package BT_1_8.chieu;
 
+import BT_1_8.chieu.exception.NullOrEmptyException;
+
 import java.util.Scanner;
 
 public abstract class Student extends Person {
@@ -32,7 +34,7 @@ public abstract class Student extends Person {
     }
 
     @Override
-    public void input() {
+    public void input() throws NullOrEmptyException {
         Scanner sc = new Scanner(System.in);
 
         super.input();
@@ -72,7 +74,7 @@ public abstract class Student extends Person {
 
     public abstract String getClassify();
 
-    public abstract double tuitionFee();
+    public abstract long tuitionFee();
 
     @Override
     public String toString() {
