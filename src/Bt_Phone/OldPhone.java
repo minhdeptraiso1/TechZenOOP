@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class OldPhone extends Phone implements Promotion {
     private int batteryStatus;  // tình trạng pin: 0-100%
 
+
     // ==================== CONSTRUCTORS ====================
 
     public OldPhone() {

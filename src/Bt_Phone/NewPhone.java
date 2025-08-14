@@ -25,8 +25,6 @@ public class NewPhone extends Phone {
         }
     }
 
-    // ==================== GETTER & SETTER WITH VALIDATION ====================
-
     public int getPhoneNumber() {
         return phoneNumber;
     }
@@ -40,8 +38,6 @@ public class NewPhone extends Phone {
         }
         this.phoneNumber = phoneNumber;
     }
-
-    // ==================== INPUT METHOD ====================
 
     @Override
     public void input(Scanner sc) {
